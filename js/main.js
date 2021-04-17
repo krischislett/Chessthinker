@@ -23,6 +23,9 @@ function startGame() {
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes
 	
+	$("#showCourse").text("Beginner");	
+	$("#showLevel").text("Level 20");
+
 	updateClocks();
 	startClocks();
 }
@@ -33,4 +36,12 @@ function myResize() {
 
 $(document).ready(function() {
 	startGame();
+	
+	$('input[type=radio][name=course]').change(function() {
+		$("#showCourse").text($('input[name="course"]:checked').val());
+	});
+	
+	$('#level').change(function() {
+		$("#showLevel").text($('#level').find(":selected").val());
+	});	
 });
