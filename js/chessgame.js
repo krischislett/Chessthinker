@@ -31,9 +31,9 @@ GameState["stockfish"].onmessage = function(event) {
     const data = event.data ? event.data : "";
 
     if (data.includes("bestmove")) {
-        if (orientationofPlayer == "w") {
+        if (GameState["orientation"] == "w") {
             db.doc("g2Rooms/" + gRoom).update({ "wEvals":ENGINE_evals });
-        } else if (orientationofPlayer == "b") {
+        } else if (GameState["orientation"] == "b") {
             db.doc("g2Rooms/" + gRoom).update({ "bEvals":ENGINE_evals });
         }
     } else if (data.includes("info depth")) {
@@ -173,7 +173,7 @@ function updateDraws() {
         let src = parseSquare(ENGINE_lines[GameState["index"]].from);
         let dst = parseSquare(ENGINE_lines[GameState["index"]].to);
 
-        if (orientationofPlayer === "b") {
+        if (GameState["orientation"] === "b") {
             src.x = 7 - src.x;
             src.y = 7 - src.y;
             dst.x = 7 - dst.x;
@@ -274,8 +274,8 @@ function onDragStart(source, piece, position, orientation) {
     if (GameState["game"].game_over()) return false;
 
     // Lock remote player
-    if ((orientationofPlayer == "w" && piece.search(/^b/) !== -1) ) { return false; }
-    if ((orientationofPlayer == "b" && piece.search(/^w/) !== -1) ) { return false; }
+    if ((GameState["orientation"] == "w" && piece.search(/^b/) !== -1) ) { return false; }
+    if ((GameState["orientation"] == "b" && piece.search(/^w/) !== -1) ) { return false; }
   
     // Only pick up pieces for the side to move
     if ((GameState["game"].turn() === 'w' && piece.search(/^b/) !== -1) ||
@@ -294,11 +294,9 @@ function onDrop(source, target, shouldCmdSend=true) {
     // Illegal move
     if (move === null) { return 'snapback'; }
 	
-    GameState["index"]++; // Always increment immediately
+    GameState["index"]++;
 	sendMove(source, target);
 	addTime();
-    sendClocks();
-
     userMovePlayed();
     return move;
 }
