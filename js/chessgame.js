@@ -273,15 +273,13 @@ function onDragStart(source, piece, position, orientation) {
     // Do not pick up pieces if the game is over
     if (GameState["game"].game_over()) return false;
 
-    // Lock remote player
-    if ((GameState["orientation"] == "w" && piece.search(/^b/) !== -1) ) { return false; }
-    if ((GameState["orientation"] == "b" && piece.search(/^w/) !== -1) ) { return false; }
-  
     // Only pick up pieces for the side to move
     if ((GameState["game"].turn() === 'w' && piece.search(/^b/) !== -1) ||
         (GameState["game"].turn() === 'b' && piece.search(/^w/) !== -1)) {
         return false;
     }
+	
+	return true;
 }
 
 function onDrop(source, target, shouldCmdSend=true) {
