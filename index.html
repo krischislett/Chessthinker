@@ -17,31 +17,34 @@
 	</head>
     <body>
 		<section class="content">
-			<div id="stadium" class="stadium">
-				<div class="container-fluid">
-					<div class="row">
-						<div id="statpanel" class="col-md-3">
-							<div id="benchtop" class="benchtop bench panel">
-								<div id='nameB' class='left-bench1 benchPlayer'>Black</div>
-									<div class='right-bench1'>
-										<span id="clockB"></span>
+			<div style="display:flex;flex-direction:row;">
+				<div style="flex:1;">
+					<div id="stadium" class="stadium">
+						<div class="container-fluid">
+							<div class="row">
+								<div id="statpanel" class="col-md-3">
+									<div id="benchtop" class="benchtop bench panel">
+										<div id='nameB' class='left-bench1 benchPlayer'>Black</div>
+										<div class='right-bench1'>
+											<span id="clockB"></span>
+										</div>
 									</div>
-								</div>
-								<div id="stat" class="panel stat" style="color:blue;">
-									<div id="pgn"></div>
-								</div>
-								<div id="benchbottom" class="benchbttom bench panel">
-									<div id='nameW' class='left-bench2 benchPlayer'>White</div>
-									<div class='right-bench2' >
-										<section id="clockW"/>
+									<div id="stat" class="panel stat" style="color:blue;">
+										<div id="pgn"></div>
+									</div>
+									<div id="benchbottom" class="benchbttom bench panel">
+										<div id='nameW' class='left-bench2 benchPlayer'>White</div>
+										<div class='right-bench2' >
+											<section id="clockW"/>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div id="arena" class="xpanel resizeable ui-widget-content" style="width:37%;position:relative;">
-					<div id="myBoard"></div>
+				<div id="arena" class="xpanel resizeable ui-widget-content" style="flex:1;">
+					<div id="myBoard"></div>						
 					<div id="annotation" style="visibility:hidden">
 						<svg id="drawings" width="100%" height="100%"
                   	  		 style="position: absolute; left: 0px; top: 0px; opacity: 1; z-index: 10;">
@@ -53,6 +56,7 @@
 						</svg>
 					</div>
 				</div>
+				
 			</div>
 		</section>
 	</body>
