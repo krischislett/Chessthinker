@@ -104,10 +104,6 @@ function getFEN(i = GameState["index"]) {
     return tmp.fen();
 }
 
-function isGameOver(tmp = new Chess(getFEN())) {
-    return tmp.in_checkmate() || tmp.in_draw();
-}
-
 function moveBegin() {
     if (!isBegin()) { jumpTo(0); return true; }
     return false;
