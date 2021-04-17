@@ -14,6 +14,8 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeW":null,
 				  "timeB":null }
 
+var Courses = { "beginner":[], "intermediate":[] };
+
 function startGame() {	
 	const fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
@@ -25,7 +27,7 @@ function startGame() {
 	
 	$("#showCourse").text("Beginner");	
 	$("#showLevel").text("Level 20");
-
+	
 	updateClocks();
 	startClocks();
 }
@@ -43,5 +45,18 @@ $(document).ready(function() {
 	
 	$('#level').change(function() {
 		$("#showLevel").text($('#level').find(":selected").val());
-	});	
+	});
+	
+	const readData = function(x) {
+		jQuery.get("/data/" + x + ".tsv", function(data) {
+			const lines = data.split(/\r?\n/);
+			for (var i = 0; i < lines.length; i++) {
+				const toks = lines[i].split(" ");
+				Courses[x].push({ "id":toks[0], "fen":toks[1] });
+			}
+		});
+	};
+	
+	readData("beginner");
+	readData("intermediate");
 });
