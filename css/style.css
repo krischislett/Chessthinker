@@ -229,10 +229,6 @@ section.content #comm small {
     font-size: .85rem;
 }
 
-section.content #comm1 #status {
-    width: 100%;
-}
-
 .clearfix {
     display: block;
     clear: both;
