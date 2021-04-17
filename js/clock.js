@@ -4,31 +4,22 @@ function startClocks() {
 		return;
 	}
 	
-	const fen = game.fen();
-	let x = 0; if (fen.includes(" b ")) { x = 1; }
-		
-	if (GameState["times"][x] <= 0) {
-		GameState["times"][x] = 0;
-		if (x == 0) {
-			document.getElementById("clockW").innerHTML = "00:00";
-			reloadUI();
-		} else {
-			document.getElementById("clockB").innerHTML = "00:00";
-			reloadUI();
-		}
+	const fen  = GameState["game"].fen();
+	const time = fen.includes(" w ") ? "timeW" : "timeB";
+	
+	if (GameState[time] <= 0) {
+		GameState[time] = 0;
+		updateClocks();
 	} else {
-		if (GameState["state"] == "running" && GameState["times"][x]) {
-			setTimeout(function() {
-				if (GameState["moves"].length) {
-					GameState["times"][x] -= 1.0;
-					updateClocks(x);
-					startClocks(x);
-					sendClocks();
-				} else {
-					startClocks(x);					
-				}
-			}, 1000);
-		}
+		setTimeout(function() {
+			if (GameState["state"] == "running" && GameState[time] > 0) {
+				if (GameState["moves"].length || true) {
+					GameState[time] -= 1.0;
+					updateClocks();
+				}				
+			}	
+			startClocks();
+		}, 1000);		
 	}
 }
 
@@ -46,6 +37,6 @@ function formatTime(x) {
 }
 
 function updateClocks() {
-	document.getElementById("clockW").innerHTML = formatTime(GameState["times"][0]);		
-	document.getElementById("clockB").innerHTML = formatTime(GameState["times"][1]);
+	$("#clockW").text(formatTime(GameState["timeW"]));
+	$("#clockB").text(formatTime(GameState["timeB"]));
 }

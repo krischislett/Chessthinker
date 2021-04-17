@@ -4,45 +4,45 @@
 		<meta charset="utf-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
-					<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
-						<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
-							<link type="text/css" rel="stylesheet" href="./css/jquery-ui.css">
-								<link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css">
-									<link type="text/css" rel="stylesheet" href="./css/w3.css">
-										<link type="text/css" rel="stylesheet" href="./css/g2game.css">
-											<link type="text/css" rel="stylesheet" href="./css/style.css">
-												<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-												<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-												<script src="https://kit.fontawesome.com/2133ee87b3.js" crossorigin="anonymous"></script>
-											</head>
-											<style>
-      .adjust.img {
-      position:relative;
-      top: 50px;
-      }
-      .stadium {
-      align-items:center;
-      }
-   </style>
-											<body onresize="myResize()">
-												<section class="content">
-													<div id="stadium" class="stadium">
-														<div class="container-fluid">
-															<div class="row">
-																<div id="statpanel" class="col-md-3">
-																	<div id="benchtop" class="benchtop bench panel">
-																		<div id='left-bench1' class='left-bench1 benchPlayer'>(b) -player-</div>
-																		<div id='right-bench1' class='right-bench1 benchClock'>
+					<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png" />
+					<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous" />
+					<link type="text/css" rel="stylesheet" href="./css/w3.css" />
+					<link type="text/css" rel="stylesheet" href="./css/g2game.css" />
+					<link type="text/css" rel="stylesheet" href="./css/style.css" />
+					<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+					<script src="https://kit.fontawesome.com/2133ee87b3.js" crossorigin="anonymous"></script>
+				</meta>
+			</meta>
+		</meta>
+	</head>
+	<style>
+        .adjust.img {
+      	    position:relative;
+      	    top: 50px;
+        }
+        .stadium {
+		    align-items:center;
+        }
+    </style>
+    <body onresize="myResize()">
+		<section class="content">
+			<div id="stadium" class="stadium">
+				<div class="container-fluid">
+					<div class="row">
+						<div id="statpanel" class="col-md-3">
+							<div id="benchtop" class="benchtop bench panel">
+								<div id='nameB' class='left-bench1 benchPlayer'>Black</div>
+																		<div class='right-bench1'>
 																			<span id="clockB"></span>
 																		</div>
 																	</div>
 																	<div id="stat" class="panel stat" style="color:blue;">
-																		<label>PGN:</label>
 																		<div id="pgn"></div>
 																	</div>
 																	<div id="benchbottom" class="benchbttom bench panel">
-																		<div id='left-bench2' class='left-bench2 benchPlayer'>(w) -player-</div>
-																		<div id='right-bench2' class='right-bench2 benchClock' >
+																		<div id='nameW' class='left-bench2 benchPlayer'>White</div>
+																		<div class='right-bench2' >
 																			<section id="clockW"/>
 																		</div>
 																	</div>
@@ -75,13 +75,9 @@
 													<script src="js/chess.js"></script>
 													<script src="js/main.js"></script>
 													<script src="js/clock.js"></script>
-													<script src="js/jquery-3.4.1.min.js"></script>
 													<script src="js/chessboard-1.0.0.min.js"></script>
 													<script src="js/computer.js"></script>													
 													<script src="js/chessgame.js"></script>
-													<script src="js/firebase.js"></script>
-													<script src="js/jquery-1.12.4.js"></script>
-													<script src="js/jquery-1.12.1-ui.js"></script>
 													<!--- End Client side scripts ----------------------------------------->
 													<script></script>
 												</html>

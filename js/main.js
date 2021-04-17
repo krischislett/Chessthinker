@@ -18,9 +18,13 @@ function startGame() {
 	const fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
 	GameState["game"].fen(fen);
+	GameState["state"] = "running";
 	GameState["board"].position(fen);
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes
+	
+	updateClocks();
+	startClocks();
 }
 
 function myResize() {
