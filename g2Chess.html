@@ -1,0 +1,369 @@
+<!--  
+   * Copyright 2020 RJ
+   * Released under the American Intercultural Education (AIE) license
+   * All rights reserved.  Code to be used excluively for AIE products and services. 
+   -->
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>yesChess Play</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+      <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+      <link type="text/css" rel="stylesheet" href="./css/jquery-ui.css">
+      <link type="text/css" rel="stylesheet" href="./css/bootstrap.min.css">
+      <link type="text/css" rel="stylesheet" href="./css/w3.css">
+      <link type="text/css" rel="stylesheet" href="./css/g2game.css">
+      <link type="text/css" rel="stylesheet" href="./css/style.css">
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+      <script src="https://kit.fontawesome.com/2133ee87b3.js" crossorigin="anonymous"></script>    
+   </head>
+   <style>
+      .adjust.img {
+      position:relative;
+      top: 50px;
+      }
+      .stadium {
+      align-items:center;
+      }
+   </style>
+   <body onresize="myResize()">
+      <section class="content">
+      <div class="top-layer">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-3 adjust">
+                  <img width="200" src="./img/yesCHESS-LOGOlight.png"/>
+               </div>
+               <div class="col-md-9">
+                  <div class="layer">
+                     <div class="row">
+                        <div class="col-sm-10">
+                           <p >TOURNAMENT: <span id="gtour" class="c-primary">&nbsp;AIE OPEN</span></p>
+                        </div>
+                        <div class="col-sm-2">
+                           <a href="../welcome.php.html"><img width="30px" src="./img/settings.png"/></a>
+                           <a href="../welcome.php.html"><img width="35px" src="./img/home.png"/></a>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-sm-4">
+                           <p >SECTION: <span id="gsection" class="c-primary">&nbsp;U2000</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                           <p >ROUND: <span id="ground" class="c-primary">&nbsp;721</span></p>
+                        </div>
+                        <div class="col-sm-4">
+                           <p >BOARD: <span id="gboard" class="c-primary">&nbsp;506</span></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="stadium" class="stadium">
+         <div class="container-fluid">
+            <div class="row">
+               <div id="statpanel" class="col-md-3">
+                  <div id="benchtop" class="benchtop bench panel">
+                     <div id='left-bench1' class='left-bench1 benchPlayer'>(b) -player-</div>
+                     <div id='right-bench1' class='right-bench1 benchClock'>
+                        <span id="clockB"></span>
+                     </div>
+                  </div>
+                  <div id="stat" class="panel stat" style="color:blue;">
+                     <label>PGN:</label>
+                     <div id="pgn"></div>
+                  </div>
+                  <div id="benchbottom" class="benchbttom bench panel">
+                     <div id='left-bench2' class='left-bench2 benchPlayer'>(w) -player-</div>
+                     <div id='right-bench2' class='right-bench2 benchClock' >
+                        <section id="clockW"/>
+                     </div>
+                  </div>
+                  <style>
+                  .benchClock {
+                  color:#470b4d;
+                  font-size:1.5rem;
+                  font-weight: bold;
+                  }
+                  </style>
+               </div>
+               <div id="arena" class="xpanel resizeable ui-widget-content" style="width:37%;position:relative;">
+               <div id="myBoard"></div>
+               <div id="annotation" style="visibility:hidden">
+               <svg id="drawings" width="100%" height="100%"
+                  style="position: absolute; left: 0px; top: 0px; opacity: 1; z-index: 10;">
+               <defs>
+               <marker id="arrowhead" orient="auto" markerWidth="4" markerHeight="8" refX="2.05" refY="2.01" cgkey="g">
+               <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+               </marker>
+               </defs>
+               </svg>
+               </div>
+               </div>
+               <div class="col-md-3">
+               <div id="comm" class="panel comm"> 
+               <small>Status</small>
+               <div id="comm1" class="comm1">
+               <div id="status" style="color:blue;font-size:1.1rem;font-weight: bold;"></div>    
+               </div>                      
+               <div id="comm2" class="comm2"><small>Chat</small></div>
+               <textarea id="RComm" class="RComm"></textarea>
+               <small>Message:</small> 
+               <input id="txtMessage" autocomplete="off" placeholder="Write here" class="txtMessage">
+               <input id="cmdSend" type="button" value="send" class="cmdSend" onclick="sendChat('SendTxt')">
+               <div id="observe" style="visibility:hidden">
+               <div class="navigation">
+               <span id="fa-fast-backward-span">
+               <i style="margin-right:20px" id="fa-fast-backward" class="fas fa-2x fa-fast-backward"></i>
+               </span>
+               <span>
+               <i style="margin-right:20px" id="fa-step-backward" class="fas fa-2x fa-step-backward"></i>
+               </span>
+               <span>
+               <i style="margin-right:20px" id="fa-step-forward" class="fas fa-2x fa-step-forward"></i>
+               </span>
+               <span>
+               <i style="margin-right:20px" id="fa-fast-forward" class="fas fa-2x fa-fast-forward"></i>
+               </span>
+               </div>
+               <div style="margin-top:20px">
+               Engine evaluation:
+               <span id="eval" style="color:black;font-weight:bold;"></span>
+               <div id="line" style="color:black;font-weight:bold;"></div>
+               </div>
+               <div style="width:480px;height:250px;margin-top:20px">
+               <canvas id="chart" width="480px" height="250px"></canvas>
+               </div>           
+               </div>                     
+               </div>
+               <div class="clearfix"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </section>
+      <!-- Reserve -->
+      <div id="fen" style="display: none">
+         <button onclick="pauseGame()">Pause/Start</button>
+         <button onclick="restart()">Re-Start</button>
+      </div>
+   </body>
+   <footer>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-4">
+               <small>Tournament brought to you by: AIE.</small>
+            </div>
+            <div class="col-md-4">
+               <small id="todaysdate">-today-</small>
+            </div>
+            <div class="col-md-4">
+               <small>&copy; Copyright 2020. All rights reserved.</small>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- ### Modal: Created for Ted to bypass normal security so Ted can select userID without signing and create a standalone chess board for editing ### -->
+   <style>
+      /* The Modal (background) */
+      .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      /* Modal Content */
+      .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+      }
+      /* Add Animation */
+      @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0} 
+      to {top:0; opacity:1}
+      }
+      @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+      }
+      /* The Close Button */
+      .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      }
+      .modal-header {
+      padding: 2px 16px;
+      float: left;
+      background-color: #5cb85c;
+      color: white;
+      }
+      .modal-body {padding: 2px 16px;}
+   </style>
+   <!-- The Modal -->
+   <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+         <div class="modal-header">
+            <span class="close">&times;</span>
+            <h3>Setting for Game Board: Modal Created for Ted to bybass Firestore signon</h3>
+         </div>
+         <div class="modal-body">
+            <br>
+            <h3>Simulated Pairing ...</h3>
+            <br>
+            <div class='row'>
+               <div class='col-md-6'>
+                  <div class='form-group required'>
+                     <input type='text' class='form-control' id='playerW_name' name='playerW_name' placeholder='User Name for White Player'>
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class='col-md-6'>
+                  <div class='form-group required'>
+                     <input type='text' class='form-control' id='playerB_name' name='playerB_name' placeholder='User Name for Black Player'>
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <input type="number" class="form-control" id="event_clock_MM" name="event_clock_MM" placeholder="Clock Minutes">
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <select id="event_clock" name="event_clock" class="form-control selectpicker">
+                        <option value="2">Simple Delay</option>
+                        <option value="0">Fischer</option>
+                        <option value="1">Bronstein</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <input type="number" class="form-control" id="event_clock_incr" name="event_clock_incr"  placeholder="Clock Delay Seconds">
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class='col-md-12'>
+                  <div class='form-group required'>
+                     <small>If no clock setting specified will DEFAULT to 30 seconds; no delay.</small><br>
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class='col-md-8'>
+                  <div class='form-group required'>
+                     <button class='md-close md-button' onclick='javascript:createPairing();'>&nbsp;&nbsp;Create Game&nbsp;&nbsp;</button><br>
+                     <style>.md-button {outline:none;}</style>
+                  </div>
+               </div>
+            </div>
+            <hr>
+            <div class='row'>
+               <div class='col-md-12'>
+                  <div class='form-group required'>
+                     <p id="wURL">White: [Click Create Game]</p>
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class='col-md-12'>
+                  <div class='form-group required'>
+                     <p id="bURL">Black: [Click Create Game]</p>
+                  </div>
+               </div>
+            </div>
+            <div class='row'>
+               <div class='col-md-12'>
+                  <div class='form-group required'>
+                     <p id="vURL">Viewer: [Click Create Game]</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- End Modal body -->
+      </div>
+      <!-- End Modal content -->
+   </div>
+   <!-- End Modal -->
+   <script>
+      var modal = document.getElementById("myModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      //btn.onclick = function() {
+      //  modal.style.display = "block";
+      //}
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+   </script>
+   <!--- Begin Client side scripts --------------------------------------->
+   <script src="js/fsconfig.js"></script>
+   <script src="js/init.js"></script>
+   <script src="js/clock.js"></script>
+   <script src="js/gen2.js"></script>
+   <script src="js/jquery-3.4.1.min.js"></script>
+   <script src="js/chessboard-1.0.0.min.js"></script>
+   <script src="js/chess.js"></script>
+   <script src="js/chessgame.js"></script>
+   <script src="js/firebase.js"></script>
+   <script src="js/jquery-1.12.4.js"></script>
+   <script src="js/jquery-1.12.1-ui.js"></script>
+   <!--- End Client side scripts ----------------------------------------->
+   <script>
+      // TBD
+      var objDiv = document.getElementById("RComm");
+      objDiv.scrollTop = objDiv.scrollHeight;
+   </script>
+</html>

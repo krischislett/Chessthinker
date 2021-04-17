@@ -1,0 +1,271 @@
+/* UTILITY CSS STARTS HERE */
+@font-face {
+	font-family: 'lato-light';
+	src: url('../fonts/Lato-Light.ttf')  format('truetype');
+}
+
+@font-face {
+	font-family: 'lato-bold';
+	src: url('../fonts/Lato-Bold.ttf')  format('truetype');
+}
+
+@font-face {
+	font-family: 'lato-italic';
+	src: url('../fonts/Lato-Italic.ttf')  format('truetype');
+}
+
+@font-face {
+	font-family: 'lato-regular';
+	src: url('../fonts/Lato-Regular.ttf')  format('truetype');
+}
+
+body, * {
+	margin: 0;
+	padding: 0;
+}
+
+body, p, button {
+	font-family: 'lato-regular';
+}
+
+body {
+	background: #f3f7fa;
+}
+
+.lato-light {
+	font-family: 'lato-light';
+}
+
+.lato-bold {
+	font-family: 'lato-bold';
+}
+
+.lato-italic {
+	font-family: 'lato-italic';
+}
+
+.lato-regular {
+	font-family: 'lato-regular';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.c-primary {
+    color: #257bc8;
+}
+
+.c-white {
+    color: #fff;
+}
+
+#txtMessage {
+    width:100%;
+}
+
+.btn-b-primary:hover,
+.btn-b-primary {
+    background: #3a4ccc;
+    color: #fff;
+}
+
+.btn-b-secondary:hover,
+.btn-b-secondary {
+    background: #d5d5d5;
+    color: #fff;
+}
+
+.c-grey {
+    color: #c8c8c8;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Chat */
+#RComm {
+    height: 30px;
+    float: left; 
+    overflow-y: overlay; 
+    direction: rtl; 
+    width: 100%;
+    text-align: left; 
+    color: #111;
+    height: auto;
+    min-height: 100px;
+    max-height: 385px;
+    border: 1px solid #e2e2e2;
+    /* background-color: rgba(245, 245, 245, 0.788); */
+    margin-bottom: 20px;
+    background: #fff;
+    overflow: auto;
+    padding: 5px;
+}
+
+#comm {
+    padding: 10px 20px 20px 20px;
+}
+
+.chat {
+    width: 150px;
+    height: 25px;
+    min-width: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: white;
+}
+
+.navbar-brand img {
+    max-width: 180px;
+}
+
+header {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.1);
+    background: #fff;
+}
+
+header .navbar {
+    padding: .5rem 0 !important;
+}
+
+header .navbar-nav a {
+    text-transform: uppercase;
+    color: #333;
+    font-family: 'lato-regular';
+}
+
+header .navbar-nav .nav-item {
+    margin-left: 15px;
+}
+
+header .navbar-nav .nav-item:last-child a {
+    color: #fff;
+    background: #2a7ac3;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 1px solid #2a7ac3;
+}
+
+body {
+    background: none;
+}
+
+section.content {
+    background: #f4f5fa !important;
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
+}
+
+section.content .layer {
+    border-radius: 20px;
+    padding: 20px 25px;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    background-color: #ffffff;
+    margin-bottom: 30px;
+}
+
+section.content .top-layer p {
+    margin-bottom: 0;
+    font-size: .95rem;
+    font-weight: bold;
+}
+
+section.content #benchtop {
+    position: relative;
+    border-top: 3px solid #257bc8;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    background-color: #ffffff;
+}
+
+section.content #benchbottom,
+section.content #stat {
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+
+section.content #comm {
+    position: relative;
+    border-top: 3px solid #257bc8;
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+    background-color: #ffffff;
+    height: auto;
+    margin-top: 0;
+}
+
+section.content #comm input#chxat {
+    padding: 5px 15px;
+    background: #fff;
+    font-size: 1rem;
+    border-radius: 3px;
+    width: calc(100% - 59px);
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+}
+
+section.content #comm small {
+    font-size: .85rem;
+}
+
+section.content #comm1 #status {
+    width: 100%;
+}
+
+.clearfix {
+    display: block;
+    clear: both;
+}
+
+footer {
+    background: #257bc8;
+    width: 100%;
+    position: relative;
+    display: block;
+    padding: 10px 0;
+}
+
+footer div {
+    text-align: center;
+    color: #fff;
+    font-size: .95rem;
+    font-family: 'lato-bold';
+    text-transform: uppercase;
+}
+
+/* CHESS TILES CUSTOM COLORS */
+.white-1e1d7 {
+
+    background-color:#f3fcff!important;
+}
+
+.black-3c85d {
+    background-color: #2d6ea7!important;
+}
+
+@media (max-width: 767px) {
+    .resizeable {
+        width: 100%;
+    }
+}
