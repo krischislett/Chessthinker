@@ -270,12 +270,11 @@ function initChart() {
 }
 
 function onDragStart(source, piece, position, orientation) {
-    // Do not pick up pieces if the game is over
-    if (GameState["game"].game_over()) return false;
-
-    // Only pick up pieces for the side to move
-    if ((GameState["game"].turn() === 'w' && piece.search(/^b/) !== -1) ||
-        (GameState["game"].turn() === 'b' && piece.search(/^w/) !== -1)) {
+    if (GameState["game"].game_over()) {
+		return false;
+	}
+    else if ((GameState["game"].turn() === 'w' && piece[0] !== "w") ||
+             (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
         return false;
     }
 	
