@@ -1,8 +1,6 @@
-var board = null
 var $status = $('#status')
 var $fen = $('#fen')
 var $pgn = $('#pgn')
-var game = new Chess() // https://github.com/jhlywa/chess.js/blob/master/README.md
 
 var config; // Engine chart data
 var chart;  // Engine evaluation chart
@@ -28,7 +26,7 @@ function reportMate(isWhiteMate) {
     updateEval(isWhiteMate ? 9999 : -9999);
 }
 
-stockfish.onmessage = function(event) {
+GameState["stockfish"].onmessage = function(event) {
     let forceUpdate = false;
     const data = event.data ? event.data : "";
 
@@ -87,7 +85,7 @@ stockfish.onmessage = function(event) {
 function jumpTo(to) {
     const fen = getFEN(to);
     GameState["index"] = to;
-    board.position(fen, false);
+    GameState["board"].position(fen, false);
     removeDraws();
     startAnalysis(fen);
     reloadNavigationButtons();
@@ -95,7 +93,7 @@ function jumpTo(to) {
 
 function getFEN(i = GameState["index"]) {
     let tmp = new Chess();
-    const hist = game.history();
+    const hist = GameState["game"].history();
 
     if (i != 0) {
         for (var j = 0; j < i; j++) {
@@ -116,7 +114,7 @@ function moveBegin() {
 }
 
 function moveEnd() {
-    if (!isEnd()) { jumpTo(game.history().length); return true; }
+    if (!isEnd()) { jumpTo(GameState["game"].history().length); return true; }
     return false;
 }
 
@@ -128,56 +126,6 @@ function stepNext() {
 function stepBack() {
     if (!isBegin()) { jumpTo(GameState["index"] - 1); return true; }
     return false;
-}
-
-function startAnalysis(fen = getFEN()) {
-    if (isGameOver()) {
-        if (game.in_checkmate()) {
-            const isWhiteTurn = getFEN().includes(" w ");
-            const isWhiteWon = !isWhiteTurn;
-            reportEval("");
-            $("#line").text("");
-            updateEval(isWhiteWon ? 9999 : -9999);
-        } else {
-            updateEval(0);            
-            reportEval("Draw");
-        }        
-        updateChart();
-    } else {
-        stockfishChartN = 0;
-        stockfish.postMessage("stop");
-        stockfish.postMessage("position fen " + fen);
-        stockfish.postMessage("go movetime 2000");
-        console.log(">>>> position fen "+ fen);
-    }
-}
-
-function updateChart() {
-    config.vlines = [];
-    config.data.labels = [];
-    config.data.datasets[0].data = [];
-    config.data.datasets[1].data = [];
-
-    for (var i = 0; i < game.history().length+1; i++) {
-        config.data.labels.push(i);
-        if (ENGINE_evals[i] == null) {
-            config.data.datasets[0].data.push({ x:i, y:0, backgroundColor:"red" });
-        } else {
-            const eval = Math.max(Math.min(ENGINE_evals[i], 5), -5);
-            config.data.datasets[0].data.push({ x:i, y:eval, backgroundColor:"red" });    
-        }
-    }
-
-    // Always to scale the graph
-    for (var i = 0; i < 10; i++) {
-        config.data.datasets[1].data.push({ x:i, y:0, backgroundColor:"red" });
-    }
-
-    if (config.data.datasets[0].data.length && GameState["index"] <= config.data.datasets[0].data.length) {
-        config.vlines = [{ key:GameState["index"], color:"blue" }];
-    }
-
-    chart.update();
 }
 
 function createCircle(cx, cy) {
@@ -323,21 +271,21 @@ function initChart() {
 
 function onDragStart(source, piece, position, orientation) {
     // Do not pick up pieces if the game is over
-    if (game.game_over()) return false;
+    if (GameState["game"].game_over()) return false;
 
     // Lock remote player
     if ((orientationofPlayer == "w" && piece.search(/^b/) !== -1) ) { return false; }
     if ((orientationofPlayer == "b" && piece.search(/^w/) !== -1) ) { return false; }
   
     // Only pick up pieces for the side to move
-    if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    if ((GameState["game"].turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (GameState["game"].turn() === 'b' && piece.search(/^w/) !== -1)) {
         return false;
     }
 }
 
 function onDrop(source, target, shouldCmdSend=true) {
-    const move = game.move({
+    const move = GameState["game"].move({
         from: source,
         to: target,
         promotion: 'q' // NOTE: always promote to a queen for example simplicity
@@ -369,7 +317,7 @@ function updateGameUI() {
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
 function onSnapEnd() {
-    board.position(game.fen())
+    board.position(GameState["game"].fen())
 }
 
 function isBegin() {
@@ -377,7 +325,7 @@ function isBegin() {
 }
 
 function isEnd() {
-    return GameState["index"] == game.history().length;
+    return GameState["index"] == GameState["game"].history().length;
 }
 
 function reloadNavigationButtons() {
@@ -391,7 +339,7 @@ function reloadUI() {
     var status = ''
 
     var moveColor = 'White'
-    if (game.turn() === 'b') {
+    if (GameState["game"].turn() === 'b') {
         moveColor = 'Black'
     }
 	
@@ -409,21 +357,21 @@ function reloadUI() {
         sendClocks();
 		GameState["result"] = "1-0";
         sendResult();
-    } else if (game.in_checkmate()) {
+    } else if (GameState["game"].in_checkmate()) {
         status = 'Game over, ' + moveColor + ' is in checkmate.';
-		if (game.fen().includes(" w ")) {
+		if (GameState["game"].fen().includes(" w ")) {
 			GameState["result"] = "0-1";
 		} else {
 			GameState["result"] = "1-0";			
 		}
         sendResult();
-    } else if (game.in_draw()) {
+    } else if (GameState["game"].in_draw()) {
         status = 'Game over, drawn position';
 		GameState["result"] = "1/2-1/2";
         sendResult();
     } else {
-        status = (game.fen().includes(" w ") ? "White" : "Black") + ' to move'
-        if (game.in_check()) {
+        status = (GameState["game"].fen().includes(" w ") ? "White" : "Black") + ' to move'
+        if (GameState["game"].in_check()) {
             status += ', ' + moveColor + ' is in check';
 			GameState["result"] = "*";
 	        sendResult();
@@ -439,7 +387,7 @@ function reloadUI() {
 }
 
 function updateResult() {
-	let pgn = game.pgn();
+	let pgn = GameState["game"].pgn();
 	if (GameState["result"] != null && GameState["result"] != "*") {
 		pgn += (" " + GameState["result"]);
 	}
@@ -449,13 +397,6 @@ function updateResult() {
 function updateStatus() {
 	$status.html(GameState["status"]);
 }
-
-board = Chessboard('myBoard', {
-    draggable:GameState["player"] == null || GameState["player"][0] != "v",
-    onDrop:onDrop,
-    onSnapEnd:onSnapEnd,
-    onDragStart:onDragStart
-});
 
 function resizing() {
     board.resize();
@@ -469,7 +410,8 @@ function compare(x, y) {
 	return JSON.stringify(x) == JSON.stringify(y);
 }
 
-function startGame(roomID) {	
+function startGame_(roomID) {
+	/*
 	db.doc(roomID).onSnapshot((doc) => {
 		firebaseUpdated(doc.data());
     });
@@ -527,13 +469,19 @@ function startGame(roomID) {
         if (code == 37) { stepBack(); }
         if (code == 39) { stepNext(); }
     });
-
-    startAnalysis();
+	*/
 }
 
-$(window).resize(board.resize);
-myResize();
+//$(window).resize(board.resize);
+//myResize();
 
-function myResize() {
-    document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
-}
+//function myResize() {
+//    document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
+//}
+
+GameState["board"] = Chessboard('myBoard', {
+    draggable:GameState["player"] == null || GameState["player"][0] != "v",
+    onDrop:onDrop,
+    onSnapEnd:onSnapEnd,
+    onDragStart:onDragStart
+});
