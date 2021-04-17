@@ -292,19 +292,12 @@ function onDrop(source, target, shouldCmdSend=true) {
     });
 
     // Illegal move
-    if (move === null) { return 'snapback'; }
+    if (move == null) { return 'snapback'; }
 	
     GameState["index"]++;
-	sendMove(source, target);
 	addTime();
-    userMovePlayed();
+	reloadUI();
     return move;
-}
-
-// Called after a move played by a user
-function userMovePlayed() {
-    reloadUI();
-    startAnalysis();
 }
 
 function updateGameUI() {
@@ -315,7 +308,7 @@ function updateGameUI() {
 // update the board position after the piece snap
 // for castling, en passant, pawn promotion
 function onSnapEnd() {
-    board.position(GameState["game"].fen())
+    GameState["board"].position(GameState["game"].fen())
 }
 
 function isBegin() {
@@ -341,20 +334,16 @@ function reloadUI() {
         moveColor = 'Black'
     }
 	
-	const isWTimeOut = GameState["times"][0] != null && GameState["times"][0] <= 0;
-	const isBTimeOut = GameState["times"][0] != null && GameState["times"][1] <= 0;
+	const isWTimeOut = GameState["timeW"] != null && GameState["timeW"] <= 0;
+	const isBTimeOut = GameState["timeB"] != null && GameState["timeB"] <= 0;
 
     // Out of time?
     if (isWTimeOut) {
         status = 'Game over, White is out of Time.';
-        sendClocks();
 		GameState["result"] = "0-1";
-        sendResult();
     } else if (isBTimeOut) {
         status = 'Game over, Black is out of Time.';
-        sendClocks();
 		GameState["result"] = "1-0";
-        sendResult();
     } else if (GameState["game"].in_checkmate()) {
         status = 'Game over, ' + moveColor + ' is in checkmate.';
 		if (GameState["game"].fen().includes(" w ")) {
@@ -362,23 +351,18 @@ function reloadUI() {
 		} else {
 			GameState["result"] = "1-0";			
 		}
-        sendResult();
     } else if (GameState["game"].in_draw()) {
         status = 'Game over, drawn position';
 		GameState["result"] = "1/2-1/2";
-        sendResult();
     } else {
         status = (GameState["game"].fen().includes(" w ") ? "White" : "Black") + ' to move'
         if (GameState["game"].in_check()) {
             status += ', ' + moveColor + ' is in check';
 			GameState["result"] = "*";
-	        sendResult();
         }
     }
 
 	GameState["status"] = status;
-	sendResult();
-	sendStatus();
 	updateResult();
 	updateStatus();
 	reloadNavigationButtons();

@@ -33,9 +33,12 @@ function startClocks() {
 }
 
 function addTime() {
-	const fen = game.fen();
-	let x = 0; if (fen.includes(" w ")) { x = 1; }
-	GameState["times"][x] += GameState["inc"];
+	const fen = GameState["game"].fen();
+	if (fen.includes(" w ")) {
+		GameState["timeW"] += GameState["inc"];
+	} else {
+		GameState["timeB"] += GameState["inc"];
+	}	
 }
 
 function formatTime(x) {
