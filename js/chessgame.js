@@ -26,62 +26,6 @@ function reportMate(isWhiteMate) {
     updateEval(isWhiteMate ? 9999 : -9999);
 }
 
-GameState["stockfish"].onmessage = function(event) {
-    let forceUpdate = false;
-    const data = event.data ? event.data : "";
-
-    if (data.includes("bestmove")) {
-        if (GameState["orientation"] == "w") {
-            db.doc("g2Rooms/" + gRoom).update({ "wEvals":ENGINE_evals });
-        } else if (GameState["orientation"] == "b") {
-            db.doc("g2Rooms/" + gRoom).update({ "bEvals":ENGINE_evals });
-        }
-    } else if (data.includes("info depth")) {
-        let toks = data.split(" ");
-
-        // Check for validity...
-        for (var i = 0; i < toks.length; i++) {
-            if (toks[i] === "pv") {
-                const fen  = getFEN();
-                const val  = toks[i+1];
-                const move = (new Chess(fen)).move({ from:val.slice(0,2), to:val.slice(2,4), promotion:'q' });
-                if (move == null) {
-                    console.log("------------ SKIP ------------");
-                    return;
-                }
-            }
-        }
-
-        for (var i = 0; i < toks.length; i++) {
-            if (toks[i] === "mate") {
-                const val = parseInt(toks[i+1]);
-                const isWhiteTurn = getFEN().includes(" w ");
-                const isWhiteWon = (isWhiteTurn && val > 0) || (!isWhiteTurn && val < 0);
-                reportMate(isWhiteWon);
-            } else if (toks[i] === "cp") {
-                cp = parseInt(toks[i+1]) / 100
-                if (getFEN().includes(" b ")) {
-                    cp = -1 * cp
-                }
-                updateEval(cp);
-                $("#eval").text(cp);
-            } else if (toks[i] === "pv") {
-                const fen  = getFEN();
-                const val  = toks[i+1];
-                const move = (new Chess(fen)).move({ from:val.slice(0,2), to:val.slice(2,4), promotion:'q' });
-                const moveN = Math.floor((GameState["index"]) / 2)+1 + (fen.includes(" b ") ? "..." : ".");
-                ENGINE_lines[GameState["index"]] = move; // Best move
-                forceUpdate = true;
-                $("#line").text(moveN + ENGINE_lines[GameState["index"]].san);
-            }
-        }
-
-        if (forceUpdate || ((stockfishChartN++ % 10) == 0) ) {
-            updateGameUI();
-        }
-    }
-};
-
 function jumpTo(to) {
     const fen = getFEN(to);
     GameState["index"] = to;
@@ -286,9 +230,15 @@ function onDrop(source, target, shouldCmdSend=true) {
 
     // Illegal move
     if (move == null) { return 'snapback'; }
+    
+	// Immediately increment the index
+	GameState["index"]++;
+		
+	if (!GameState["game"].game_over()) {
+		addTime();
+		startThink();		
+	}
 	
-    GameState["index"]++;
-	addTime();
 	reloadUI();
     return move;
 }
