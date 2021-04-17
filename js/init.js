@@ -36,22 +36,10 @@ var gBoard = "123";
 var dDate = new Date();
 var nDate = dDate.toLocaleDateString();
 
-document.getElementById("todaysdate").innerHTML = nDate;
-document.getElementById("gtour").innerHTML = "Loading ....";
-document.getElementById("gsection").innerHTML = "Loading ...";
-document.getElementById("ground").innerHTML = "Loading ....";
-document.getElementById("gboard").innerHTML = "Loading ...";
-
 var stockfish = new Worker("js/stockfish.js");
 
 // Iniatialize Game
 const queryString = window.location.search;
-
-if (queryString.length < 10) { 
-    // In production Display Error Message ... for testing invoke modal to create pairing
-    modal.style.display = "block";  
-} 
-else { linkToGame(); }
 
 var Name = 'Any name you want';
 
