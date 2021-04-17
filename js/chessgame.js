@@ -270,8 +270,6 @@ function reloadNavigationButtons() {
 }
 
 function reloadUI() {
-    var status = ''
-
     var moveColor = 'White'
     if (GameState["game"].turn() === 'b') {
         moveColor = 'Black'
@@ -282,30 +280,19 @@ function reloadUI() {
 
     // Out of time?
     if (isWTimeOut) {
-        status = 'Game over, White is out of Time.';
 		GameState["result"] = "0-1";
     } else if (isBTimeOut) {
-        status = 'Game over, Black is out of Time.';
 		GameState["result"] = "1-0";
     } else if (GameState["game"].in_checkmate()) {
-        status = 'Game over, ' + moveColor + ' is in checkmate.';
 		if (GameState["game"].fen().includes(" w ")) {
 			GameState["result"] = "0-1";
 		} else {
 			GameState["result"] = "1-0";			
 		}
     } else if (GameState["game"].in_draw()) {
-        status = 'Game over, drawn position';
 		GameState["result"] = "1/2-1/2";
-    } else {
-        status = (GameState["game"].fen().includes(" w ") ? "White" : "Black") + ' to move'
-        if (GameState["game"].in_check()) {
-            status += ', ' + moveColor + ' is in check';
-			GameState["result"] = "*";
-        }
     }
 
-	GameState["status"] = status;
 	updateResult();
 	updateStatus();
 	reloadNavigationButtons();

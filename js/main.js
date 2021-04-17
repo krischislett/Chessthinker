@@ -6,8 +6,7 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "chat":[],
 				  "player":"w",
 				  "computer":"b",
-				  "mode":null,				
-				  "result":null,
+				  "result":"*",
 				  "status":null,
 				  "inc":0,
   				  "index":0,
@@ -19,8 +18,9 @@ function startGame() {
 	const fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	
 	GameState["game"].fen(fen);
-	GameState["board"].position(fen)
-	
+	GameState["board"].position(fen);
+	GameState["timeW"] = 30 * 60; // 30 minutes
+	GameState["timeB"] = 10 * 60; // 10 minutes
 }
 
 function myResize() {
