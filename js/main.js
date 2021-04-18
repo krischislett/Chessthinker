@@ -13,12 +13,8 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeW":null,
 				  "timeB":null }
 
-function myResize() {
-    //document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
-}
-
 function getSelectedFEN() {
-	return "????";
+	return $('#fens').find(":selected").text();
 }
 
 function updateFENs() {
@@ -72,9 +68,8 @@ $(document).ready(function() {
 	$("#showCourse").text("Beginner");	
 	$("#showLevel").text("Level 20");
 	
-	updateFENs();
-	
-	startNew();
+	updateFENs();	
 	updateClocks();
-	startClocks();	
+	startClocks();
+	startNew();	
 });

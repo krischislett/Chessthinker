@@ -244,11 +244,8 @@ function onDrop(source, target, shouldCmdSend=true) {
 }
 
 function startNew() {
-	const fens = getFENs();
-	const rand = fens[Math.floor(Math.random() * fens.length)];
-	
 	GameState["moves"] = [];
-	GameState["game"].load(rand.fen);
+	GameState["game"].load(getSelectedFEN());
 	GameState["board"].position(GameState["game"].fen());
 }
 
