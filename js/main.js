@@ -14,20 +14,10 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeW":null,
 				  "timeB":null }
 
-function startGame() {
-	//const fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-	
-	//GameState["game"].fen(fen);
+function initGame() {
 	GameState["state"] = "running";
-	//GameState["board"].position(fen);
 	GameState["timeW"] = 30 * 60; // 30 minutes
-	GameState["timeB"] = 10 * 60; // 10 minutes
-	
-	$("#showCourse").text("Beginner");	
-	$("#showLevel").text("Level 20");
-	
-	updateClocks();
-	startClocks();
+	GameState["timeB"] = 10 * 60; // 10 minutes	
 }
 
 function myResize() {
@@ -47,5 +37,12 @@ $(document).ready(function() {
 		$("#showLevel").text($('#level').find(":selected").val());
 	});
 	
+	$("#showCourse").text("Beginner");	
+	$("#showLevel").text("Level 20");
+	
 	startNew();
+	updateClocks();
+	startClocks();	
 });
+
+initGame();
