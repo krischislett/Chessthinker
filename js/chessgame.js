@@ -308,7 +308,16 @@ function reloadUI() {
 }
 
 function updateResult() {
-	let pgn = GameState["game"].pgn();
+	let lines = GameState["game"].pgn().split("\n");
+	
+	let pgn = "";
+	for (var i = 0;i < lines.length; i++){
+		if (lines[i].includes("[")) {
+			continue;
+		}		
+		pgn += (lines[i] + "\n");
+	}
+		
 	if (GameState["result"] != null && GameState["result"] != "*") {
 		pgn += (" " + GameState["result"]);
 	}
