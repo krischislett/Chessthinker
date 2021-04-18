@@ -212,8 +212,7 @@ function initChart() {
 function onDragStart(source, piece, position, orientation) {
     if (GameState["game"].game_over()) {
 		return false;
-	}
-    else if ((GameState["game"].turn() === 'w' && piece[0] !== "w") ||
+	} else if ((GameState["game"].turn() === 'w' && piece[0] !== "w") ||
              (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
         return false;
     }
@@ -236,7 +235,33 @@ function onDrop(source, target, shouldCmdSend=true) {
 		
 	if (!GameState["game"].game_over()) {
 		addTime();
-		startThink();		
+		startThink();
+	} else {		
+		const p = GameState["player"];
+		const c = GameState["computer"];
+		
+		const game   = GameState["game"];
+		const isDraw = game.in_draw();
+		const isWWon = !isDraw && game.fen().includes(" b ");
+		
+		// Only credits if the player wins by checkmate
+		const shouldCredit = (p === "w" && isWWon) || (p === "b" && !isWWon)
+		
+		if (shouldCredit) {
+			// The positon being played
+			const fen = getSelectedFEN();
+			
+			// Assume it's always matched and FEN unique
+			const x = Courses[getSelectedCourse().toLowerCase()].find((x) => x.fen === fen);
+			
+			x.status = 1; // Completed
+			updateCredits();
+			
+			console.log(fen);
+			alert("Added credit for FEN: " + fen);
+		} else {
+			alert("NO credit");			
+		}
 	}
 	
 	reloadUI();
@@ -244,7 +269,8 @@ function onDrop(source, target, shouldCmdSend=true) {
 }
 
 function startNew() {
-	GameState["moves"] = [];
+	GameState["moves"]  = [];
+	GameState["result"] = "*";	
 	GameState["game"].load(getSelectedFEN());
 	GameState["board"].position(GameState["game"].fen());
 }

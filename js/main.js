@@ -13,6 +13,10 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeW":null,
 				  "timeB":null }
 
+function getSelectedCourse() {
+	return $('input[name="course"]:checked').val();
+}
+
 function getSelectedFEN() {
 	return $('#fens').find(":selected").text();
 }
@@ -20,16 +24,47 @@ function getSelectedFEN() {
 function updateFENs() {
 	const fens = Courses[$('input[name="course"]:checked').val().toLowerCase()];
 
-	$('#fens').empty();
+	$("#fens").empty();
 	$.each(fens, function (i, item) {
-	    $('#fens').append($('<option>', { 
+	    $("#fens").append($('<option>', { 
 	        value: item.id,
 	        text : item.fen 
 	    }));
 	});	
 }
 
-$(document).ready(function() {
+function updateCredits() {
+	$("#completed").empty();
+	
+	for (var key in Courses) {
+		for (var i = 0; i < Courses[key].length; i++) {
+			if (Courses[key][i].status) {
+			    $("#completed").append($('<option>', { 
+			        value: Courses[key][i].id,
+			        text : Courses[key][i].fen 
+			    }));	
+			}
+		}
+	}
+}
+
+$(document).ready(function() {	
+	if (false) {
+		Courses = {};
+		Courses['beginner'] = [     { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];
+		Courses['intermediate'] = [ { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];		
+	}
+	
+	/*
+	 * Add credits information to the courses
+	 */
+	
+	for (var key in Courses) {
+		for (var i = 0; i < Courses[key].length; i++) {			
+			Courses[key][i].status = 0;
+		}
+	}
+	
 	GameState["state"] = "running";
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes	
@@ -71,5 +106,6 @@ $(document).ready(function() {
 	updateFENs();	
 	updateClocks();
 	startClocks();
-	startNew();	
+	updateCredits();
+	startNew();
 });
