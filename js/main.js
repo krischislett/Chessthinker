@@ -14,17 +14,15 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeW":null,
 				  "timeB":null }
 
-function initGame() {
-	GameState["state"] = "running";
-	GameState["timeW"] = 30 * 60; // 30 minutes
-	GameState["timeB"] = 10 * 60; // 10 minutes	
-}
-
 function myResize() {
     //document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
 }
 
 $(document).ready(function() {
+	GameState["state"] = "running";
+	GameState["timeW"] = 30 * 60; // 30 minutes
+	GameState["timeB"] = 10 * 60; // 10 minutes	
+
 	$('#startNew').click(function() {
 		startNew();
 	});
@@ -44,5 +42,3 @@ $(document).ready(function() {
 	updateClocks();
 	startClocks();	
 });
-
-initGame();
