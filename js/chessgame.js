@@ -243,6 +243,15 @@ function onDrop(source, target, shouldCmdSend=true) {
     return move;
 }
 
+function startNew() {
+	const fens = Courses[$('input[name="course"]:checked').val().toLowerCase()];
+	const rand = fens[Math.floor(Math.random() * fens.length)];
+	
+	GameState["moves"] = [];
+	GameState["game"].load(rand.fen);
+	GameState["board"].position(GameState["game"].fen());
+}
+
 function updateGameUI() {
     updateDraws();
     updateChart();
