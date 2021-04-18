@@ -17,6 +17,22 @@ function myResize() {
     //document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
 }
 
+function getSelectedFEN() {
+	return "????";
+}
+
+function updateFENs() {
+	const fens = Courses[$('input[name="course"]:checked').val().toLowerCase()];
+
+	$('#fens').empty();
+	$.each(fens, function (i, item) {
+	    $('#fens').append($('<option>', { 
+	        value: item.id,
+	        text : item.fen 
+	    }));
+	});	
+}
+
 $(document).ready(function() {
 	GameState["state"] = "running";
 	GameState["timeW"] = 30 * 60; // 30 minutes
@@ -28,12 +44,12 @@ $(document).ready(function() {
 	
 	$('input[type=radio][name=course]').change(function() {
 		$("#showCourse").text($('input[name="course"]:checked').val());
+		updateFENs();
 	});
 	
 	$('#level').change(function() {
 		$("#showLevel").text($('#level').find(":selected").val());
 	});
-	
 
 	$('input[type=radio][name=color]').change(function() {
 		const color = $('input[name="color"]:checked').val();
@@ -55,6 +71,8 @@ $(document).ready(function() {
 	
 	$("#showCourse").text("Beginner");	
 	$("#showLevel").text("Level 20");
+	
+	updateFENs();
 	
 	startNew();
 	updateClocks();

@@ -244,7 +244,7 @@ function onDrop(source, target, shouldCmdSend=true) {
 }
 
 function startNew() {
-	const fens = Courses[$('input[name="course"]:checked').val().toLowerCase()];
+	const fens = getFENs();
 	const rand = fens[Math.floor(Math.random() * fens.length)];
 	
 	GameState["moves"] = [];
