@@ -3,7 +3,6 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "game":new Chess(),
 				  "moves":[],
 				  "state":"paused",
-				  "chat":[],
 				  "player":"w",
 				  "computer":"b",
 				  "result":"*",
@@ -33,6 +32,22 @@ $(document).ready(function() {
 	
 	$('#level').change(function() {
 		$("#showLevel").text($('#level').find(":selected").val());
+	});
+	
+
+	$('input[type=radio][name=color]').change(function() {
+		const color = $('input[name="color"]:checked').val();
+		
+		if (color === "Red") {
+			$(".white-1e1d7").css("background-color", "#f3fcff");
+			$(".black-3c85d").css("background-color", "red");			
+		} else if (color === "Green") {
+			$(".white-1e1d7").css("background-color", "#f3fcff");
+			$(".black-3c85d").css("background-color", "green");			
+		} else if (color === "Blue") {
+			$(".white-1e1d7").css("background-color", "#f3fcff");
+			$(".black-3c85d").css("background-color", "#2d6ea7");			
+		}
 	});
 	
 	$("#showCourse").text("Beginner");	

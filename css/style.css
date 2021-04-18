@@ -252,12 +252,11 @@ footer div {
 
 /* CHESS TILES CUSTOM COLORS */
 .white-1e1d7 {
-
-    background-color:#f3fcff!important;
+    background-color:#f3fcff;
 }
 
 .black-3c85d {
-    background-color: #2d6ea7!important;
+    background-color:#2d6ea7;
 }
 
 @media (max-width: 767px) {
