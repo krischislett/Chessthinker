@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>Chess Thinker</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">		
+		<link type="text/css" rel="stylesheet" href="./css/w3.css" />
+		<link type="text/css" rel="stylesheet" href="./css/g2game.css" />
+		<link type="text/css" rel="stylesheet" href="./css/style.css" />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+		<script src="https://kit.fontawesome.com/2133ee87b3.js" crossorigin="anonymous"></script>
+	</head>
+    <body>
+		<div style="width:500px;">
+			<table class="table" style="border:2px solid black;">
+		  	    <tbody>
+		    		<tr>
+		        		<th scope="row" colspan=8><div style="margin: auto;text-align: center;vertical-align: middle;">Misc 04 - Level 20</div></th>
+					</tr>
+					<tr>
+						<td class="cell-number">1</td>
+						<td class="cell-check">
+				  		  <div style="width:20px;">					  
+					  	      <img width="20" height="20" src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'>					  
+						  </div>
+					    </td>
+						<td class="cell-number">26</td>
+						<td class="cell-check">
+				  		  <div style="width:20px;">					  
+					  	      <img width="20" height="20" src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'>					  
+						  </div>
+						</td>
+						<td class="cell-number">51</td>
+						<td class="cell-check">
+				  		  <div style="width:20px;">					  
+					  	      <img width="20" height="20" src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'>					  
+						  </div>
+						</td>
+						<td class="cell-number">76</td>
+						<td class="cell-check">
+				  		  <div style="width:20px;">					  
+					  	      <img width="20" height="20" src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'>					  
+						  </div>
+						</td>
+					</tr>
+					<tr><td class="cell-number">2</td><td class="cell-check"></td><td class="cell-number">27</td><td class="cell-check"></td><td class="cell-number">52</td><td class="cell-check"></td><td class="cell-number">77</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">3</td><td class="cell-check"></td><td class="cell-number">28</td><td class="cell-check"></td><td class="cell-number">53</td><td class="cell-check"></td><td class="cell-number">78</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">4</td><td class="cell-check"></td><td class="cell-number">29</td><td class="cell-check"></td><td class="cell-number">54</td><td class="cell-check"></td><td class="cell-number">79</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">5</td><td class="cell-check"></td><td class="cell-number">30</td><td class="cell-check"></td><td class="cell-number">55</td><td class="cell-check"></td><td class="cell-number">80</td><td class="cell-check"></td></tr>					
+					<tr><td class="cell-number">6</td><td class="cell-check"></td><td class="cell-number">31</td><td class="cell-check"></td><td class="cell-number">56</td><td class="cell-check"></td><td class="cell-number">81</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">7</td><td class="cell-check"></td><td class="cell-number">32</td><td class="cell-check"></td><td class="cell-number">57</td><td class="cell-check"></td><td class="cell-number">82</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">8</td><td class="cell-check"></td><td class="cell-number">33</td><td class="cell-check"></td><td class="cell-number">58</td><td class="cell-check"></td><td class="cell-number">83</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">9</td><td class="cell-check"></td><td class="cell-number">34</td><td class="cell-check"></td><td class="cell-number">59</td><td class="cell-check"></td><td class="cell-number">84</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">10</td><td class="cell-check"></td><td class="cell-number">35</td><td class="cell-check"></td><td class="cell-number">60</td><td class="cell-check"></td><td class="cell-number">85</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">11</td><td class="cell-check"></td><td class="cell-number">36</td><td class="cell-check"></td><td class="cell-number">61</td><td class="cell-check"></td><td class="cell-number">86</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">12</td><td class="cell-check"></td><td class="cell-number">37</td><td class="cell-check"></td><td class="cell-number">62</td><td class="cell-check"></td><td class="cell-number">87</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">13</td><td class="cell-check"></td><td class="cell-number">38</td><td class="cell-check"></td><td class="cell-number">63</td><td class="cell-check"></td><td class="cell-number">88</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">14</td><td class="cell-check"></td><td class="cell-number">39</td><td class="cell-check"></td><td class="cell-number">64</td><td class="cell-check"></td><td class="cell-number">89</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">15</td><td class="cell-check"></td><td class="cell-number">40</td><td class="cell-check"></td><td class="cell-number">65</td><td class="cell-check"></td><td class="cell-number">90</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">16</td><td class="cell-check"></td><td class="cell-number">41</td><td class="cell-check"></td><td class="cell-number">66</td><td class="cell-check"></td><td class="cell-number">91</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">17</td><td class="cell-check"></td><td class="cell-number">42</td><td class="cell-check"></td><td class="cell-number">67</td><td class="cell-check"></td><td class="cell-number">92</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">18</td><td class="cell-check"></td><td class="cell-number">43</td><td class="cell-check"></td><td class="cell-number">68</td><td class="cell-check"></td><td class="cell-number">93</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">19</td><td class="cell-check"></td><td class="cell-number">44</td><td class="cell-check"></td><td class="cell-number">69</td><td class="cell-check"></td><td class="cell-number">94</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">20</td><td class="cell-check"></td><td class="cell-number">45</td><td class="cell-check"></td><td class="cell-number">70</td><td class="cell-check"></td><td class="cell-number">95</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">21</td><td class="cell-check"></td><td class="cell-number">46</td><td class="cell-check"></td><td class="cell-number">71</td><td class="cell-check"></td><td class="cell-number">96</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">22</td><td class="cell-check"></td><td class="cell-number">47</td><td class="cell-check"></td><td class="cell-number">72</td><td class="cell-check"></td><td class="cell-number">97</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">23</td><td class="cell-check"></td><td class="cell-number">48</td><td class="cell-check"></td><td class="cell-number">73</td><td class="cell-check"></td><td class="cell-number">98</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">24</td><td class="cell-check"></td><td class="cell-number">49</td><td class="cell-check"></td><td class="cell-number">74</td><td class="cell-check"></td><td class="cell-number">99</td><td class="cell-check"></td></tr>
+					<tr><td class="cell-number">25</td><td class="cell-check"></td><td class="cell-number">50</td><td class="cell-check"></td><td class="cell-number">75</td><td class="cell-check"></td><td class="cell-check">100</td><td class="cell-check"></td></tr>					
+				</tbody>
+			</table>
+		</div>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>	
+</html>
