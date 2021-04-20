@@ -49,9 +49,9 @@ function updateCredits() {
 	$("#creditContainer").show();
 	$("#creditTitle").text(key);	
 	for (var i = 0; i < Courses[key].length; i++) {
+		const next = $(".cell-" + i).next();
+		next.empty();
 		if (Courses[key][i].status) {
-			const next = $(".cell-" + i).next();
-			next.empty();
 			next.prepend($('<img>',{width:'20', height:'20', src:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'}));
 		}
 	}	
