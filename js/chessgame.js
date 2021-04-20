@@ -252,15 +252,10 @@ function onDrop(source, target, shouldCmdSend=true) {
 			const fen = getSelectedFEN();
 			
 			// Assume it's always matched and FEN unique
-			const x = Courses[getSelectedCourse().toLowerCase()].find((x) => x.fen === fen);
+			const x = Courses[getSelectedCourse()].find((x) => x.fen === fen);
 			
-			x.status = 1; // Completed
-			updateCredits();
-			
-			console.log(fen);
-			alert("Added credit for FEN: " + fen);
-		} else {
-			alert("NO credit");			
+			x.status = 1;    // Completed
+			updateCredits(); // Update the credits
 		}
 	}
 	

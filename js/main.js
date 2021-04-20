@@ -43,11 +43,16 @@ function updateFENs() {
 
 function updateCredits() {	
 	const key = getSelectedCreditCourse();
+	if (Courses[key] == null) {
+		return;
+	}	
 	$("#creditContainer").show();
 	$("#creditTitle").text(key);	
 	for (var i = 0; i < Courses[key].length; i++) {
 		if (Courses[key][i].status) {
-			$(".cell-" + i).next().text("TICKED");
+			const next = $(".cell-" + i).next();
+			next.empty();
+			next.prepend($('<img>',{width:'20', height:'20', src:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'}));
 		}
 	}	
 }
