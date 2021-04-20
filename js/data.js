@@ -1,6 +1,6 @@
 Courses = {};
 
-Courses['beginner'] = [
+Courses['Beginner'] = [
 { 'id':1, 'fen':'K7/8/8/4k3/8/8/8/7Q w - - 0 1' },
 { 'id':2, 'fen':'8/8/8/8/8/8/7P/k6K w - - 0 1' },
 { 'id':3, 'fen':'8/8/8/6p1/8/8/5PPP/k6K w - - 0 1' },
@@ -103,7 +103,7 @@ Courses['beginner'] = [
 { 'id':100, 'fen':'1n2k3/2pppp2/8/8/8/8/PPPPPPPP/1N2K1N1 w - - 0 1' },
 ];
 
-Courses['intermediate'] = [
+Courses['Intermediate'] = [
 { 'id':1, 'fen':'K7/8/8/4k3/8/8/8/7R w - - 0 1' },
 { 'id':2, 'fen':'8/3bk3/2pppp2/8/4P3/3PKP2/3RQ3/8 w - - 0 1' },
 { 'id':3, 'fen':'2b1k3/3ppp2/8/8/8/8/2PPPP2/2B1KB2 w - - 0 1' },

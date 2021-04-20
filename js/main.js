@@ -17,12 +17,20 @@ function getSelectedCourse() {
 	return $('input[name="course"]:checked').val();
 }
 
+function getSelectedCreditCourse() {
+	return $('#credits').find(":selected").text();
+}
+
 function getSelectedFEN() {
 	return $('#fens').find(":selected").text();
 }
 
+function getSelectedLevel() {
+	return $('#level').find(":selected").val();
+}
+
 function updateFENs() {
-	const fens = Courses[$('input[name="course"]:checked').val().toLowerCase()];
+	const fens = Courses[$('input[name="course"]:checked').val()];
 
 	$("#fens").empty();
 	$.each(fens, function (i, item) {
@@ -33,28 +41,30 @@ function updateFENs() {
 	});	
 }
 
-function updateCredits() {
-	$("#completed").empty();
-	
-	for (var key in Courses) {
-		for (var i = 0; i < Courses[key].length; i++) {
-			if (Courses[key][i].status) {
-			    $("#completed").append($('<option>', { 
-			        value: Courses[key][i].id,
-			        text : Courses[key][i].fen 
-			    }));	
-			}
+function updateCredits() {	
+	const key = getSelectedCreditCourse();
+	$("#creditContainer").show();
+	$("#creditTitle").text(key);	
+	for (var i = 0; i < Courses[key].length; i++) {
+		if (Courses[key][i].status) {
+			$(".cell-" + i).next().text("TICKED");
 		}
-	}
+	}	
 }
 
 $(document).ready(function() {	
+	/*
 	if (false) {
 		Courses = {};
-		Courses['beginner'] = [     { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];
-		Courses['intermediate'] = [ { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];		
+		Courses['Beginner'] = [     { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];
+		Courses['Intermediate'] = [ { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];		
 	}
+	*/
 	
+	$(".cell1").each(function() {
+		$(this).addClass("cell-" + ($(this).text()-1));
+	});
+
 	/*
 	 * Add credits information to the courses
 	 */
@@ -63,6 +73,10 @@ $(document).ready(function() {
 		for (var i = 0; i < Courses[key].length; i++) {			
 			Courses[key][i].status = 0;
 		}
+		$("#credits").append($('<option>', { 
+	        value: key,
+	        text : key 
+	    }));
 	}
 	
 	GameState["state"] = "running";
@@ -79,12 +93,15 @@ $(document).ready(function() {
 	});
 	
 	$('#level').change(function() {
-		$("#showLevel").text($('#level').find(":selected").val());
+		$("#showLevel").text(getSelectedLevel());
+	});
+
+	$('#credits').change(function() {
+		updateCredits();
 	});
 
 	$('input[type=radio][name=color]').change(function() {
-		const color = $('input[name="color"]:checked').val();
-		
+		const color = $('input[name="color"]:checked').val();		
 		if (color === "Red") {
 			$(".white-1e1d7").css("background-color", "#f3fcff");
 			$(".black-3c85d").css("background-color", "red");			
@@ -106,6 +123,5 @@ $(document).ready(function() {
 	updateFENs();	
 	updateClocks();
 	startClocks();
-	updateCredits();
 	startNew();
 });
