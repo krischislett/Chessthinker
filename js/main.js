@@ -14,15 +14,11 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeB":null }
 
 function getSelectedCourse() {
-	return $("button[selected='selected']").text();
+	return $(".selected-set-button").text();
 }
 
 function getSelectedFEN() {
-	return $('#fens').find(":selected").text();
-}
-
-function getSelectedLevel() {
-	return $('#level').find(":selected").val();
+	return Courses[getSelectedCourse()][getSelectedID()].fen;
 }
 
 function updateFENs() {
@@ -42,7 +38,7 @@ function updateCredits() {
 	if (Courses[key] == null) {
 		return;
 	}
-	$("#creditTitle").text(key);	
+	$(".creditTitle").text(key);	
 	for (var i = 0; i < Courses[key].length; i++) {
 		const next = $(".cell-" + i).next();
 		next.empty();
@@ -66,21 +62,29 @@ function updateBoardColor() {
 	} else if (color === "Brown") {
 		$(".white-1e1d7").css("background-color", "#f3fcff");
 		$(".black-3c85d").css("background-color", "#CD853F");			
-	}	
+	}
 }
 
+function getSelectedID() {
+	return parseInt($(".selected-cell").attr("id"));
+}
 
 $(document).ready(function() {	
-	/*
-	if (false) {
-		Courses = {};
-		Courses['Beginner'] = [     { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];
-		Courses['Intermediate'] = [ { 'id':1, 'fen':'1r6/1r5k/8/8/K7/6R1/6R1/8 w - - 0 1' } ];		
-	}
-	*/
-	
 	$(".cell1").each(function() {
+		$(this).attr("id", $(this).text()-1);
 		$(this).addClass("cell-" + ($(this).text()-1));
+	});
+
+	$(".cell1").click(function() {
+		const course = getSelectedCourse();
+		if (course == null || course.length == 0) {
+			alert("Please select a course!");
+			return;
+		}
+		
+		$(".selected-cell").removeClass("selected-cell");
+		$(this).addClass("selected-cell");		
+		startNew();
 	});
 
 	/*
@@ -123,13 +127,13 @@ $(document).ready(function() {
 	});
 	
 	$(".set-button").click(function() {
-		$("button[selected='selected']").removeAttr("selected");
-		$(this).attr("selected", "true");
+		$(".selected-set-button").removeClass("selected-set-button");
+		$(this).addClass("selected-set-button");
 		updateCredits();
 	});
 	
+	updateClocks();
+	startClocks();	
 	updateFENs();
 	updateBoardColor();	
-	updateClocks();
-	startClocks();
 });
