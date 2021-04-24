@@ -140,5 +140,9 @@ $(document).ready(function() {
 		updateFENs();
 	});
 	
+	GameState["timeW"] = 30 * 60; // 30 minutes
+	GameState["timeB"] = 10 * 60; // 10 minutes	
+	
+	updateClocks();
 	updateBoardColor();	
 });
