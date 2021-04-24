@@ -17,9 +17,7 @@ GameState["stockfish"].onmessage = function(event) {
 };
 
 function startThink() {
-	const level = parseInt($('#level').find(":selected").val().replace("Level ", ""));
     GameState["stockfish"].postMessage("stop");	
-	GameState["stockfish"].postMessage("setoption name Skill Level value " + level);
     GameState["stockfish"].postMessage("position fen " + GameState["game"].fen());
     GameState["stockfish"].postMessage("go movetime 1000");
 }
