@@ -54,8 +54,26 @@ function updateCredits() {
 		if (Courses[key][i].status) {
 			next.prepend($('<img>',{width:'20', height:'20', src:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Checkmark_green.svg/1200px-Checkmark_green.svg.png'}));
 		}
+	}
+}
+
+function updateBoardColor() {
+	const color = $('input[name="color"]:checked').val();		
+	if (color === "Red") {
+		$(".white-1e1d7").css("background-color", "#f3fcff");
+		$(".black-3c85d").css("background-color", "red");			
+	} else if (color === "Green") {
+		$(".white-1e1d7").css("background-color", "#f3fcff");
+		$(".black-3c85d").css("background-color", "green");			
+	} else if (color === "Blue") {
+		$(".white-1e1d7").css("background-color", "#f3fcff");
+		$(".black-3c85d").css("background-color", "#2d6ea7");			
+	} else if (color === "Brown") {
+		$(".white-1e1d7").css("background-color", "#f3fcff");
+		$(".black-3c85d").css("background-color", "#CD853F");			
 	}	
 }
+
 
 $(document).ready(function() {	
 	/*
@@ -106,26 +124,14 @@ $(document).ready(function() {
 	});
 
 	$('input[type=radio][name=color]').change(function() {
-		const color = $('input[name="color"]:checked').val();		
-		if (color === "Red") {
-			$(".white-1e1d7").css("background-color", "#f3fcff");
-			$(".black-3c85d").css("background-color", "red");			
-		} else if (color === "Green") {
-			$(".white-1e1d7").css("background-color", "#f3fcff");
-			$(".black-3c85d").css("background-color", "green");			
-		} else if (color === "Blue") {
-			$(".white-1e1d7").css("background-color", "#f3fcff");
-			$(".black-3c85d").css("background-color", "#2d6ea7");			
-		} else if (color === "Brown") {
-			$(".white-1e1d7").css("background-color", "#f3fcff");
-			$(".black-3c85d").css("background-color", "#CD853F");			
-		}
+		updateBoardColor();
 	});
 	
 	$("#showCourse").text("Beginner");	
 	$("#showLevel").text("Level 20");
 	
-	updateFENs();	
+	updateFENs();
+	updateBoardColor();	
 	updateClocks();
 	startClocks();
 	startNew();
