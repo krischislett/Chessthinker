@@ -420,13 +420,6 @@ function startGame_(roomID) {
 	*/
 }
 
-//$(window).resize(board.resize);
-//myResize();
-
-//function myResize() {
-//    document.getElementById('stat').style.height = (document.getElementById('myBoard').offsetHeight - 120) + 'px';
-//}
-
 GameState["board"] = Chessboard('myBoard', {
     draggable:GameState["player"] == null || GameState["player"][0] != "v",
     onDrop:onDrop,

@@ -55,6 +55,16 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 0;
 }
 
+.set-button {
+	background-color:brown;
+	border-radius:20px;
+	width:110px;
+	height:40px;
+	color:white;
+	margin-left:5px;
+	margin-right:5px;
+}
+
 .c-primary {
     color: #257bc8;
 }
