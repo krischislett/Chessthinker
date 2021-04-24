@@ -63,8 +63,8 @@ function updateBoardColor() {
 		$(".white-1e1d7").css("background-color", "#f3fcff");
 		$(".black-3c85d").css("background-color", "red");			
 	} else if (color === "Green") {
-		$(".white-1e1d7").css("background-color", "#f3fcff");
-		$(".black-3c85d").css("background-color", "green");			
+		$(".white-1e1d7").css("background-color", "#eeeed5");
+		$(".black-3c85d").css("background-color", "#769655");			
 	} else if (color === "Blue") {
 		$(".white-1e1d7").css("background-color", "#f3fcff");
 		$(".black-3c85d").css("background-color", "#2d6ea7");			
