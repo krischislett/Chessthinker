@@ -22,7 +22,12 @@ function getSelectedFEN() {
 }
 
 function updateFENs() {
-	const fens = Courses[$('input[name="course"]:checked').val()];
+	const course = getSelectedCourse();
+	if (course == null || course.length == 0) {
+		return;
+	}
+	
+	const fens = Courses[course.replace(" ", "")];
 
 	$("#fens").empty();
 	$.each(fens, function (i, item) {
@@ -69,6 +74,19 @@ function getSelectedID() {
 	return parseInt($(".selected-cell").attr("id"));
 }
 
+function startGame() {
+	GameState["timeW"] = 30 * 60; // 30 minutes
+	GameState["timeB"] = 10 * 60; // 10 minutes	
+	
+	if (GameState["state"] == null) {
+		updateClocks();
+		startClocks();			
+	}
+
+	GameState["state"] = "running";		
+	startNew();	
+}
+
 $(document).ready(function() {	
 	$(".cell1").each(function() {
 		$(this).attr("id", $(this).text()-1);
@@ -83,17 +101,8 @@ $(document).ready(function() {
 		}
 		
 		$(".selected-cell").removeClass("selected-cell");
-		$(this).addClass("selected-cell");
-		GameState["timeW"] = 30 * 60; // 30 minutes
-		GameState["timeB"] = 10 * 60; // 10 minutes	
-		
-		if (GameState["state"] == null) {
-			updateClocks();
-			startClocks();			
-		}
-
-		GameState["state"] = "running";		
-		startNew();
+		$(this).addClass("selected-cell");		
+		startGame();
 	});
 
 	/*
@@ -110,13 +119,10 @@ $(document).ready(function() {
 	    }));
 	}
 	
-	$('input[type=radio][name=course]').change(function() {
-		$("#showCourse").text($('input[name="course"]:checked').val());
-		updateFENs();
-	});
-	
-	$('#level').change(function() {
-		$("#showLevel").text(getSelectedLevel());
+	$('#fens').change(function() {
+		$(".selected-cell").removeClass("selected-cell");		
+		$(".cell-" + parseInt($('#fens').find(":selected").val())).addClass("selected-cell");
+		startGame();
 	});
 
 	$('#credits').change(function() {
@@ -131,8 +137,8 @@ $(document).ready(function() {
 		$(".selected-set-button").removeClass("selected-set-button");
 		$(this).addClass("selected-set-button");
 		updateCredits();
+		updateFENs();
 	});
 	
-	updateFENs();
 	updateBoardColor();	
 });
