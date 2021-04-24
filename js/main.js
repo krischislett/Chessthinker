@@ -101,7 +101,7 @@ $(document).ready(function() {
 		}
 		
 		$(".selected-cell").removeClass("selected-cell");
-		$(this).addClass("selected-cell");		
+		$(this).addClass("selected-cell");
 		startGame();
 	});
 

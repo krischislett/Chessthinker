@@ -69,6 +69,10 @@ h1, h2, h3, h4, h5, h6 {
 	margin-right:5px;
 }
 
+.selected-cell {
+	color:blue;
+}
+
 .selected-set-button {
 	border-width:5px;
 	border-color:blue;
