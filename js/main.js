@@ -128,11 +128,9 @@ $(document).ready(function() {
 	});
 	
 	$("#showCourse").text("Beginner");	
-	$("#showLevel").text("Level 20");
 	
 	updateFENs();
 	updateBoardColor();	
 	updateClocks();
 	startClocks();
-	startNew();
 });
