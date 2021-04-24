@@ -2,7 +2,7 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "board":null,
 				  "game":new Chess(),
 				  "moves":[],
-				  "state":"paused",
+				  "state":null,
 				  "player":"w",
 				  "computer":"b",
 				  "result":"*",
@@ -83,7 +83,16 @@ $(document).ready(function() {
 		}
 		
 		$(".selected-cell").removeClass("selected-cell");
-		$(this).addClass("selected-cell");		
+		$(this).addClass("selected-cell");
+		GameState["timeW"] = 30 * 60; // 30 minutes
+		GameState["timeB"] = 10 * 60; // 10 minutes	
+		
+		if (GameState["state"] == null) {
+			updateClocks();
+			startClocks();			
+		}
+
+		GameState["state"] = "running";		
 		startNew();
 	});
 
@@ -100,14 +109,6 @@ $(document).ready(function() {
 	        text : key 
 	    }));
 	}
-	
-	GameState["state"] = "running";
-	GameState["timeW"] = 30 * 60; // 30 minutes
-	GameState["timeB"] = 10 * 60; // 10 minutes	
-
-	$('#startNew').click(function() {
-		startNew();
-	});
 	
 	$('input[type=radio][name=course]').change(function() {
 		$("#showCourse").text($('input[name="course"]:checked').val());
@@ -132,8 +133,6 @@ $(document).ready(function() {
 		updateCredits();
 	});
 	
-	updateClocks();
-	startClocks();	
 	updateFENs();
 	updateBoardColor();	
 });
