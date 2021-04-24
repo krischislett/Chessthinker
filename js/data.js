@@ -1,6 +1,6 @@
 Courses = {};
 
-Courses['beginner'] = [
+Courses['Beginner'] = [
 { 'id':1, 'fen':'K7/8/8/4k3/8/8/8/7Q w - - 0 1' },
 { 'id':2, 'fen':'8/8/8/8/8/8/7P/k6K w - - 0 1' },
 { 'id':3, 'fen':'8/8/8/6p1/8/8/5PPP/k6K w - - 0 1' },
@@ -103,7 +103,7 @@ Courses['beginner'] = [
 { 'id':100, 'fen':'1n2k3/2pppp2/8/8/8/8/PPPPPPPP/1N2K1N1 w - - 0 1' },
 ];
 
-Courses['misc01'] = [
+Courses['Misc01'] = [
 { 'id':1, 'fen':'8/2k5/1pP5/1P6/2K5/8/8/8 w - - 0 1' },
 { 'id':2, 'fen':'3bk3/8/4PP2/4K3/8/8/4B3/8 w - - 0 1' },
 { 'id':3, 'fen':'8/1k6/8/1P6/1P6/1K6/8/8 w - - 0 1' },
@@ -206,7 +206,7 @@ Courses['misc01'] = [
 { 'id':100, 'fen':'b7/8/1p1k1p2/1P2pBp1/1KP5/5P2/6P1/8 w - - 0 1' },
 ];
 
-Courses['misc02'] = [
+Courses['Misc02'] = [
 { 'id':1, 'fen':'k7/8/1p6/1P6/8/8/7K/8 w - - 0 1' },
 { 'id':2, 'fen':'8/8/2p1k1p1/2p1Pp1p/1pPp1P1P/1P1P4/4K1N1/8 w - - 0 1' },
 { 'id':3, 'fen':'3r4/8/1KR5/P2k4/8/8/8/8 w - - 0 1' },
@@ -309,7 +309,7 @@ Courses['misc02'] = [
 { 'id':100, 'fen':'8/2p5/2R5/3P4/2P2k1K/8/2r5/8 w - - 0 1' },
 ];
 
-Courses['misc03'] = [
+Courses['Misc03'] = [
 { 'id':1, 'fen':'8/8/p7/P7/3k4/3P4/3K4/8 w - - 0 1' },
 { 'id':2, 'fen':'8/2p1k3/1p4pp/pP1PK3/P1P5/7P/6P1/8 w - - 0 1' },
 { 'id':3, 'fen':'7K/6R1/1k6/p7/8/8/8/8 w - - 0 1' },
@@ -412,7 +412,7 @@ Courses['misc03'] = [
 { 'id':100, 'fen':'5r2/5p1k/bpB2Qp1/p5Kp/5R2/1P2R1P1/P3P2q/6r1 w - - 0 1' },
 ];
 
-Courses['misc04'] = [
+Courses['Misc04'] = [
 { 'id':1, 'fen':'5k2/5P1p/4K3/8/8/8/7P/8 w - - 0 1' },
 { 'id':2, 'fen':'3r2k1/p2r1pp1/1pQ3p1/3P2q1/P7/6P1/5P1P/2R1R1K1 w - - 0 1' },
 { 'id':3, 'fen':'4k3/1p6/1PR2pp1/8/3PP1P1/6K1/8/3r4 w - - 0 1' },
@@ -515,7 +515,7 @@ Courses['misc04'] = [
 { 'id':100, 'fen':'8/8/8/1p6/8/PB6/Pk3K2/8 w - - 0 1' },
 ];
 
-Courses['misc05'] = [
+Courses['Misc05'] = [
 { 'id':1, 'fen':'8/2Q5/8/8/2K5/8/pk6/8 w - - 0 1' },
 { 'id':2, 'fen':'8/2k5/p1P5/P1K5/8/8/8/8 w - - 0 1' },
 { 'id':3, 'fen':'8/6p1/5k2/8/5KPP/8/8/8 w - - 0 1' },
@@ -618,7 +618,7 @@ Courses['misc05'] = [
 { 'id':100, 'fen':'4k3/2bp4/p7/8/3N4/8/P1P3KP/8 w - - 0 1' },
 ];
 
-Courses['queens'] = [
+Courses['Queens'] = [
 { 'id':1, 'fen':'4Q3/P1q3pk/7p/8/8/8/1P4PP/7K w - - 0 1' },
 { 'id':2, 'fen':'8/6k1/1Q3q1p/8/3P2p1/8/5PP1/6K1 w - - 0 1' },
 { 'id':3, 'fen':'8/8/8/8/3K4/4Q3/pk6/8 w - - 0 1' },
@@ -721,7 +721,7 @@ Courses['queens'] = [
 { 'id':100, 'fen':'3k4/p1p5/1p2Q3/8/2P5/5PP1/PPK1P3/6q1 w - - 0 1' },
 ];
 
-Courses['bishops'] = [
+Courses['Bishops'] = [
 { 'id':1, 'fen':'3bk3/8/4PP2/4K3/8/8/4B3/8 w - - 0 1' },
 { 'id':2, 'fen':'8/7p/1p2k3/3p4/PB1P2K1/2P2P2/1P6/4b3 w - - 0 1' },
 { 'id':3, 'fen':'8/8/8/4k3/6bP/4K1P1/2B5/8 w - - 0 1' },
@@ -824,7 +824,7 @@ Courses['bishops'] = [
 { 'id':100, 'fen':'5B2/8/2k4p/1p4p1/3bpp2/1P4PP/4BP2/5K2 w - - 0 1' },
 ];
 
-Courses['rooks'] = [
+Courses['Rooks'] = [
 { 'id':1, 'fen':'K7/8/8/4k3/8/8/8/7R w - - 0 1' },
 { 'id':2, 'fen':'2k5/1p6/1K6/1P4r1/3R4/P7/2P5/8 w - - 0 1' },
 { 'id':3, 'fen':'5r2/8/8/4p3/4P1K1/1PR5/2P2k2/8 w - - 0 1' },
@@ -927,7 +927,7 @@ Courses['rooks'] = [
 { 'id':100, 'fen':'8/6p1/8/p1R5/P1K1k3/1PP4r/8/8 w - - 0 1' },
 ];
 
-Courses['knights'] = [
+Courses['Knights'] = [
 { 'id':1, 'fen':'2k5/1p6/1P1K4/8/8/6N1/8/8 w - - 0 1' },
 { 'id':2, 'fen':'8/8/8/8/k7/4nN1P/6P1/6K1 w - - 0 1' },
 { 'id':3, 'fen':'8/8/2p1k1p1/2p1Pp1p/1pPp1P1P/1P1P4/4K1N1/8 w - - 0 1' },
@@ -1030,7 +1030,7 @@ Courses['knights'] = [
 { 'id':100, 'fen':'8/1N6/1p2p1kp/p3p1p1/P1P1P1P1/1P2KP1n/8/8 w - - 0 1' },
 ];
 
-Courses['pawns'] = [
+Courses['Pawns'] = [
 { 'id':1, 'fen':'8/2k5/1pP5/1P6/2K5/8/8/8 w - - 0 1' },
 { 'id':2, 'fen':'8/1k6/8/1P6/1P6/1K6/8/8 w - - 0 1' },
 { 'id':3, 'fen':'k7/8/1p6/1P6/8/8/7K/8 w - - 0 1' },
@@ -1133,7 +1133,7 @@ Courses['pawns'] = [
 { 'id':100, 'fen':'8/p7/4k1p1/4pp1p/8/3PP1PP/P4P2/6K1 w - - 0 1' },
 ];
 
-Courses['intermediate'] = [
+Courses['Intermediate'] = [
 { 'id':1, 'fen':'K7/8/8/4k3/8/8/8/7R w - - 0 1' },
 { 'id':2, 'fen':'8/3bk3/2pppp2/8/4P3/3PKP2/3RQ3/8 w - - 0 1' },
 { 'id':3, 'fen':'2b1k3/3ppp2/8/8/8/8/2PPPP2/2B1KB2 w - - 0 1' },

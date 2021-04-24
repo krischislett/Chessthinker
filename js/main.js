@@ -14,11 +14,7 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeB":null }
 
 function getSelectedCourse() {
-	return $('input[name="course"]:checked').val();
-}
-
-function getSelectedCreditCourse() {
-	return $('#credits').find(":selected").text();
+	return $("button[selected='selected']").text();
 }
 
 function getSelectedFEN() {
@@ -42,11 +38,10 @@ function updateFENs() {
 }
 
 function updateCredits() {	
-	const key = getSelectedCreditCourse();
+	const key = getSelectedCourse().replace(" ", "");
 	if (Courses[key] == null) {
 		return;
-	}	
-	$("#creditContainer").show();
+	}
 	$("#creditTitle").text(key);	
 	for (var i = 0; i < Courses[key].length; i++) {
 		const next = $(".cell-" + i).next();
@@ -127,7 +122,11 @@ $(document).ready(function() {
 		updateBoardColor();
 	});
 	
-	$("#showCourse").text("Beginner");	
+	$(".set-button").click(function() {
+		$("button[selected='selected']").removeAttr("selected");
+		$(this).attr("selected", "true");
+		updateCredits();
+	});
 	
 	updateFENs();
 	updateBoardColor();	
