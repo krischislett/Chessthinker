@@ -17,7 +17,15 @@ GameState["stockfish"].onmessage = function(event) {
 };
 
 function startThink() {
-    GameState["stockfish"].postMessage("stop");	
+    GameState["stockfish"].postMessage("stop");
     GameState["stockfish"].postMessage("position fen " + GameState["game"].fen());
-    GameState["stockfish"].postMessage("go movetime 1000");
+	
+	const shouldForce = false;
+	
+	// Slower if more than 3 minutes...
+	if (!shouldForce && GameState["timeB"] >= (3 * 60)) {
+	    GameState["stockfish"].postMessage("go movetime 5000");
+	} else {
+	    GameState["stockfish"].postMessage("go movetime 1000");
+	}
 }
