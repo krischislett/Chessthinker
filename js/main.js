@@ -14,7 +14,7 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "timeB":null }
 
 function getSelectedCourse() {
-	return $(".selected-set-button").text();
+	return $(".selected-set-button").text().replace(" ", "");
 }
 
 function getSelectedFEN() {
@@ -27,7 +27,7 @@ function updateFENs() {
 		return;
 	}
 	
-	const fens = Courses[course.replace(" ", "")];
+	const fens = Courses[course];
 
 	$("#fens").empty();
 	$.each(fens, function (i, item) {
@@ -39,7 +39,7 @@ function updateFENs() {
 }
 
 function updateCredits() {	
-	const key = getSelectedCourse().replace(" ", "");
+	const key = getSelectedCourse();
 	if (Courses[key] == null) {
 		return;
 	}
