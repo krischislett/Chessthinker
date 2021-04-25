@@ -183,6 +183,13 @@ $(document).ready(function() {
 		GameState["board"].position(GameState["game"].fen());
 	});
 	
+	$("#resign").click(function() {
+		console.log("Resign");
+		alert("You have resigned for the position. Please try again.");
+		GameState["result"] = "0-1"; // Always player play White
+		$("#resign").hide();
+	});
+	
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes	
 	
