@@ -27,15 +27,19 @@ function updateFENs() {
 		return;
 	}
 	
+	$("#fens").empty();	
 	const fens = Courses[course];
+	const selected = getSelectedID();
 
-	$("#fens").empty();
-	$.each(fens, function (i, item) {
-	    $("#fens").append($('<option>', { 
-	        value: item.id,
-	        text : item.fen 
-	    }));
-	});	
+	if (selected != null) {
+		$.each(fens, function (i, item) {
+		    $("#fens").append($('<option>', {
+		        value: item.id,
+		        text : item.id,
+				selected: item.id == (selected+1)
+		    }));
+		});
+	}
 }
 
 function updateCredits() {	
@@ -103,6 +107,7 @@ $(document).ready(function() {
 		$(".selected-cell").removeClass("selected-cell");
 		$(this).addClass("selected-cell");
 		startGame();
+		updateFENs();
 	});
 
 	/*
@@ -120,8 +125,9 @@ $(document).ready(function() {
 	}
 	
 	$('#fens').change(function() {
-		$(".selected-cell").removeClass("selected-cell");		
-		$(".cell-" + parseInt($('#fens').find(":selected").val())).addClass("selected-cell");
+		$(".selected-cell").removeClass("selected-cell");
+		const val = $('#fens').find(":selected").val()-1;
+		$(".cell-" + parseInt(val)).addClass("selected-cell");
 		startGame();
 	});
 
