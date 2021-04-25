@@ -213,23 +213,39 @@ function onDragStart(source, piece, position, orientation) {
     if (GameState["game"].game_over()) {
 		return false;
 	} else if ((GameState["game"].turn() === 'w' && piece[0] !== "w") ||
-             (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
+               (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
         return false;
     }
 	
 	return true;
 }
 
-function onDrop(source, target, shouldCmdSend=true) {
+function onDrop(source, target) {
+	const oldFEN  = GameState["game"].fen();
+	const promote = GameState["TEMP_PROMOTE"];
+	
     const move = GameState["game"].move({
         from: source,
         to: target,
-        promotion: 'q' // NOTE: always promote to a queen for example simplicity
+        promotion: (promote ? promote : 'q')
     });
-
+	
     // Illegal move
     if (move == null) { return 'snapback'; }
-    
+
+	// Need promotion?
+	if (move.promotion != null && promote == null) {
+		GameState["game"].load(oldFEN);
+		console.assert(GameState["game"].fen() == oldFEN);
+		GameState["PROMOTE_SOURCE"] = source;
+		GameState["PROMOTE_TARGET"] = target;		
+		$('#myModal').modal('toggle');
+		return;
+	}
+	
+	// Always clear
+	GameState["TEMP_PROMOTE"] = null;
+
 	// Immediately increment the index
 	GameState["index"]++;
 		

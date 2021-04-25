@@ -10,6 +10,7 @@ var GameState = { "stockfish":new Worker("js/stockfish.js"),
 				  "inc":0,
   				  "index":0,
 				  "orientation":"w",
+				  "TEMP_PROMOTE":null,
 				  "timeW":null,
 				  "timeB":null }
 
@@ -146,9 +147,47 @@ $(document).ready(function() {
 		updateFENs();
 	});
 	
+	$(".promoteQ").click(function() {
+		console.log("Promoting to queen");
+		$('#myModal').modal('hide');
+		GameState["TEMP_PROMOTE"] = "q";
+		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
+		GameState["TEMP_PROMOTE"] = null;
+		GameState["board"].position(GameState["game"].fen());
+	});
+
+	$(".promoteR").click(function() {
+		console.log("Promoting to rook");
+		$('#myModal').modal('hide');
+		GameState["TEMP_PROMOTE"] = "r";
+		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
+		GameState["TEMP_PROMOTE"] = null;
+		GameState["board"].position(GameState["game"].fen());
+	});
+
+	$(".promoteB").click(function() {
+		console.log("Promoting to knight");
+		$('#myModal').modal('hide');
+		GameState["TEMP_PROMOTE"] = "b";
+		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
+		GameState["TEMP_PROMOTE"] = null;
+		GameState["board"].position(GameState["game"].fen());
+	});
+
+	$(".promoteN").click(function() {
+		console.log("Promoting to pawn");
+		$('#myModal').modal('hide');
+		GameState["TEMP_PROMOTE"] = "n";
+		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
+		GameState["TEMP_PROMOTE"] = null;
+		GameState["board"].position(GameState["game"].fen());
+	});
+	
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes	
 	
 	updateClocks();
-	updateBoardColor();	
+	updateBoardColor();
+	
+	//$('#myModal').modal('toggle');
 });
