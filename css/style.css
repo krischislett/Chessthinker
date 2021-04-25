@@ -32,6 +32,16 @@ body {
 	background: #f3f7fa;
 }
 
+table .cell1 {
+	padding:0;
+	width:40px;
+}
+
+table .cell2 {
+	padding:0;
+	width:40px;	
+}
+
 .lato-light {
 	font-family: 'lato-light';
 }
