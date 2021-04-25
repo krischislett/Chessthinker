@@ -188,6 +188,4 @@ $(document).ready(function() {
 	
 	updateClocks();
 	updateBoardColor();
-	
-	//$('#myModal').modal('toggle');
 });
