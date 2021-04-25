@@ -265,8 +265,9 @@ function onDrop(source, target, shouldCmdSend=true) {
 
 function startNew() {
 	GameState["moves"]  = [];
-	GameState["result"] = "*";	
-	GameState["game"].load(getSelectedFEN());
+	GameState["result"] = "*";
+//	GameState["game"].load(getSelectedFEN());
+	GameState["game"].load("k7/7P/7K/8/8/8/8/8 w - - 0 1");
 	GameState["board"].position(GameState["game"].fen());
 }
 

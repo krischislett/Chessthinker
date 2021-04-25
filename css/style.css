@@ -35,11 +35,13 @@ body {
 table .cell1 {
 	padding:0;
 	width:40px;
+	height:10px;
 }
 
 table .cell2 {
 	padding:0;
 	width:40px;	
+	height:10px;	
 }
 
 .lato-light {
