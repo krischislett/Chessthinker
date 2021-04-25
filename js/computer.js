@@ -26,6 +26,6 @@ function startThink() {
 	if (!shouldForce && GameState["timeB"] >= (3 * 60)) {
 	    GameState["stockfish"].postMessage("go movetime 5000");
 	} else {
-	    GameState["stockfish"].postMessage("go movetime 1000");
+	    GameState["stockfish"].postMessage("go movetime 500");
 	}
 }

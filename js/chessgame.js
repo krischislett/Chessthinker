@@ -210,26 +210,44 @@ function initChart() {
 }
 
 function onDragStart(source, piece, position, orientation) {
-    if (GameState["game"].game_over()) {
+	if (GameState["result"] != "*") {
+		return false;
+	} else if (GameState["game"].game_over()) {
 		return false;
 	} else if ((GameState["game"].turn() === 'w' && piece[0] !== "w") ||
-             (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
+               (GameState["game"].turn() === 'b' && piece[0] !== "b")) {
         return false;
     }
 	
 	return true;
 }
 
-function onDrop(source, target, shouldCmdSend=true) {
+function onDrop(source, target) {
+	const oldFEN  = GameState["game"].fen();
+	const promote = GameState["TEMP_PROMOTE"];
+	
     const move = GameState["game"].move({
         from: source,
         to: target,
-        promotion: 'q' // NOTE: always promote to a queen for example simplicity
+        promotion: (promote ? promote : 'q')
     });
-
+	
     // Illegal move
     if (move == null) { return 'snapback'; }
-    
+
+	// Need promotion?
+	if (move.promotion != null && promote == null) {
+		GameState["game"].load(oldFEN);
+		console.assert(GameState["game"].fen() == oldFEN);
+		GameState["PROMOTE_SOURCE"] = source;
+		GameState["PROMOTE_TARGET"] = target;		
+		$('#myModal').modal('toggle');
+		return;
+	}
+	
+	// Always clear
+	GameState["TEMP_PROMOTE"] = null;
+
 	// Immediately increment the index
 	GameState["index"]++;
 		
@@ -256,7 +274,17 @@ function onDrop(source, target, shouldCmdSend=true) {
 			
 			x.status = 1;    // Completed
 			updateCredits(); // Update the credits
+
+			// Assume the player always play White
+			GameState["result"] = "1-0";
+		} else if (isDraw) {
+			GameState["result"] = "1/2-1/2";
+		} else {
+			// Assume the player always play White
+			GameState["result"] = "0-1";
 		}
+		
+		$("#resign").hide();
 	}
 	
 	reloadUI();
@@ -265,9 +293,11 @@ function onDrop(source, target, shouldCmdSend=true) {
 
 function startNew() {
 	GameState["moves"]  = [];
-	GameState["result"] = "*";	
+	GameState["result"] = "*";
 	GameState["game"].load(getSelectedFEN());
+//	GameState["game"].load("k7/7P/7K/8/8/8/8/8 w - - 0 1");
 	GameState["board"].position(GameState["game"].fen());
+	$("#resign").show();
 }
 
 function updateGameUI() {

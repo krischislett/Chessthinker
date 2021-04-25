@@ -14,6 +14,67 @@
 		<script src="https://kit.fontawesome.com/2133ee87b3.js" crossorigin="anonymous"></script>
 	</head>
     <body>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						Which piece do you want to promote to?
+					</div>
+					<div style="">
+						<table>
+							<tr>
+								<td>
+									<div class="promoteText">
+										Promote to Queen										
+									</div>
+								</td>
+								<td>
+									<div class="promoteIcon promoteQ">
+										<img src="/img/chesspieces/wikipedia/wQ.png" width=40 height=40>										
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="promoteText">
+										Promote to Rook										
+									</div>
+								</td>
+								<td>
+									<div class="promoteIcon promoteR">
+										<img src="/img/chesspieces/wikipedia/wR.png" width=40 height=40>										
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="promoteText">
+										Promote to Bishop										
+									</div>
+								</td>
+								<td>
+									<div class="promoteIco promoteB">
+										<img src="/img/chesspieces/wikipedia/wB.png" width=40 height=40>										
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="promoteText">
+										Promote to Knight										
+									</div>
+								</td>
+								<td>
+									<div class="promoteIcon promoteN">
+										<img src="/img/chesspieces/wikipedia/wN.png" width=40 height=40>										
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div style="display:flex;flex-direction:column;">
 			<div style="background-color:red;width:100%;height:100;justify-content:center;align-items:center;display:flex;">
 				<img src="https://dev.krischislett.com/chessthinker/wp-content/uploads/2021/03/logo-2.png" height=90>
@@ -78,11 +139,14 @@
 					</div>
 				</div>
 				<div style="height:100%;flex:0.5;display:flex;">
-					<div style="">
+					<div>
 						<div>
 							<div style="margin-left:20px;margin-right:20px;margin-top:20px;">
 								<div id="myBoard"></div>
 								<select id="fens" name="fens" style="width:100%;max-width:100%;min-width:100%;margin-top:10px;"></select>
+							</div>
+							<div style="margin-top:20px;margin-left:20px;">
+								<button id="resign" type="button" class="resign" style="display:none;">Resign</button>
 							</div>
 						</div>
 					</div>
@@ -91,7 +155,7 @@
 						<span id="clockW" style="margin-top:360px;"></span>
 					</div>
 				</div>
-				<div style="height:100%;flex:0.5;display:flex;margin-left:0px;margin-top:20px;">
+				<div style="height:100%;flex:0.5;display:flex;margin-left:20px;margin-top:20px;">
 					<div id="creditContainer">
 						<table class="table" style="border:2px solid black;">
 							<tbody>
