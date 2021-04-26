@@ -75,8 +75,23 @@ function updateBoardColor() {
 	}
 }
 
+function isCurrentCourseCompleted() {
+	const tmp = Courses[getSelectedCourse()];
+	for (var i = 0; i < tmp.length; i++) {
+		if (tmp[i].status == 0) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 function getSelectedID() {
 	return parseInt($(".selected-cell").attr("id"));
+}
+
+function toggleComplete() {
+	$('#modalComplete').modal('toggle');
 }
 
 function startGame() {
@@ -92,7 +107,19 @@ function startGame() {
 	startNew();	
 }
 
-$(document).ready(function() {	
+$(document).ready(function() {
+	/*
+	for (var key in Courses) {
+		for (var i = 0; i < Courses[key].length; i++) {
+			if (i != 2 && i != 4) {
+				Courses[key][i].status = 1;				
+			} else {
+				Courses[key][i].status = 0;								
+			}
+		}
+	}
+	*/
+	
 	$(".cell1").each(function() {
 		$(this).attr("id", $(this).text()-1);
 		$(this).addClass("cell-" + ($(this).text()-1));
@@ -187,6 +214,10 @@ $(document).ready(function() {
 		alert("You have resigned for the position. Please try again.");
 		GameState["result"] = "0-1"; // Always player play White
 		$("#resign").hide();
+	});
+	
+	$("#completeClose").click(function() {
+		$('#modalComplete').modal('toggle');
 	});
 	
 	GameState["timeW"] = 30 * 60; // 30 minutes

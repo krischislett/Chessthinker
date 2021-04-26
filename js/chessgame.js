@@ -270,6 +270,8 @@ function onDrop(source, target) {
 		const shouldCredit = (p === "w" && isWWon) || (p === "b" && !isWWon)
 		
 		if (shouldCredit) {
+			const oldStatus = isCurrentCourseCompleted();
+			
 			// The positon being played
 			const fen = getSelectedFEN();
 			
@@ -281,6 +283,13 @@ function onDrop(source, target) {
 
 			// Assume the player always play White
 			GameState["result"] = "1-0";
+			
+			const newStatus = isCurrentCourseCompleted();
+
+			// Just completed the course?
+			if (!oldStatus && newStatus) {
+				toggleComplete();
+			}
 		} else if (isDraw) {
 			GameState["result"] = "1/2-1/2";
 		} else {
@@ -301,7 +310,7 @@ function startNew() {
 	GameState["moves"]  = [];
 	GameState["result"] = "*";
 	GameState["game"].load(getSelectedFEN());
-//	GameState["game"].load("k7/7P/7K/8/8/8/8/8 w - - 0 1");
+	//GameState["game"].load("7k/8/8/8/8/8/6R1/5KR1 w - - 0 1");
 	GameState["board"].position(GameState["game"].fen());
 	$("#resign").show();
 }
