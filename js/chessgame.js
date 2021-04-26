@@ -289,6 +289,7 @@ function onDrop(source, target) {
 			// Just completed the course?
 			if (!oldStatus && newStatus) {
 				toggleComplete();
+				showReset();
 			}
 		} else if (isDraw) {
 			GameState["result"] = "1/2-1/2";

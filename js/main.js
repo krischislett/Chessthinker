@@ -107,11 +107,15 @@ function startGame() {
 	startNew();	
 }
 
+function showReset() {
+	$('#reset').show();
+}
+
 $(document).ready(function() {
 	/*
 	for (var key in Courses) {
 		for (var i = 0; i < Courses[key].length; i++) {
-			if (i != 2 && i != 4) {
+			if (i != 2) {
 				Courses[key][i].status = 1;				
 			} else {
 				Courses[key][i].status = 0;								
@@ -218,6 +222,17 @@ $(document).ready(function() {
 	
 	$("#completeClose").click(function() {
 		$('#modalComplete').modal('toggle');
+	});
+	
+	$("#reset").click(function() {		
+		$("#reset").hide();
+		
+		const key = getSelectedCourse();
+		for (var i = 0; i < Courses[key].length; i++) {
+			Courses[key][i].status = 0;								
+		}
+
+		updateCredits();
 	});
 	
 	GameState["timeW"] = 30 * 60; // 30 minutes
