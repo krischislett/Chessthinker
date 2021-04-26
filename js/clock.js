@@ -1,26 +1,19 @@
 
 function startClocks() {
-	if (GameState["result"] != "*") {
-		return;
-	}
-	
 	const fen  = GameState["game"].fen();
 	const time = fen.includes(" w ") ? "timeW" : "timeB";
 	
 	if (GameState[time] <= 0) {
 		GameState[time] = 0;
-		updateClocks();
-	} else {
-		setTimeout(function() {
-			if (GameState["state"] == "running" && GameState[time] > 0) {
-				if (GameState["moves"].length || true) {
-					GameState[time] -= 1.0;
-					updateClocks();
-				}				
-			}	
-			startClocks();
-		}, 1000);		
 	}
+	updateClocks();
+	
+	setTimeout(function() {
+		if (GameState["state"] == "running" && GameState["result"] == "*" && GameState["moves"].length && GameState[time] > 0) {
+			GameState[time] -= 1.0;
+		}
+		startClocks();
+	}, 1000);
 }
 
 function addTime() {

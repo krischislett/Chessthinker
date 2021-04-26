@@ -245,6 +245,9 @@ function onDrop(source, target) {
 		return;
 	}
 	
+	// Only user's moves
+	GameState["moves"].push(move);
+	
 	// Always clear
 	GameState["TEMP_PROMOTE"] = null;
 
@@ -254,7 +257,8 @@ function onDrop(source, target) {
 	if (!GameState["game"].game_over()) {
 		addTime();
 		startThink();
-	} else {		
+	} else {
+		console.log("Game over!");
 		const p = GameState["player"];
 		const c = GameState["computer"];
 		
@@ -292,6 +296,8 @@ function onDrop(source, target) {
 }
 
 function startNew() {
+	GameState["timeW"]  = 30 * 60; // 30 minutes
+	GameState["timeB"]  = 10 * 60; // 10 minutes		
 	GameState["moves"]  = [];
 	GameState["result"] = "*";
 	GameState["game"].load(getSelectedFEN());

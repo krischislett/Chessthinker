@@ -184,7 +184,6 @@ $(document).ready(function() {
 	});
 	
 	$("#resign").click(function() {
-		console.log("Resign");
 		alert("You have resigned for the position. Please try again.");
 		GameState["result"] = "0-1"; // Always player play White
 		$("#resign").hide();
