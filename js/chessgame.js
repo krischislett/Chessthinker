@@ -241,7 +241,7 @@ function onDrop(source, target) {
 		console.assert(GameState["game"].fen() == oldFEN);
 		GameState["PROMOTE_SOURCE"] = source;
 		GameState["PROMOTE_TARGET"] = target;		
-		$('#myModal').modal('toggle');
+		$('#modalPromote').modal('toggle');
 		return;
 	}
 	
