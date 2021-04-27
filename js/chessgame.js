@@ -291,6 +291,8 @@ function onDrop(source, target) {
 				toggleComplete();
 				showReset();
 			}
+			
+			toggleCheckmark();			
 		} else if (isDraw) {
 			GameState["result"] = "1/2-1/2";
 		} else {
@@ -321,8 +323,6 @@ function updateGameUI() {
     updateChart();
 }
 
-// update the board position after the piece snap
-// for castling, en passant, pawn promotion
 function onSnapEnd() {
     GameState["board"].position(GameState["game"].fen())
 }
@@ -394,76 +394,6 @@ function updateStatus() {
 
 function resizing() {
     board.resize();
-}
-
-/*
- * Event handlers
- */
-
-function compare(x, y) {
-	return JSON.stringify(x) == JSON.stringify(y);
-}
-
-function startGame_(roomID) {
-	/*
-	db.doc(roomID).onSnapshot((doc) => {
-		firebaseUpdated(doc.data());
-    });
-	
-    if (orientationofPlayer == 'w') {
-        board.orientation('white')
-        document.getElementById('benchbottom').innerHTML = "<div id='left-bench1' class='left-bench1 benchPlayer'>(w) -player-</div><div id='right-bench1' class='right-bench1 benchClock'><section id='clockW'></section></div>";
-        document.getElementById('benchtop').innerHTML = "<div id='left-bench2' class='left-bench2 benchPlayer'>(b) -player-</div><div id='right-bench2' class='right-bench2 benchClock'><section id='clockB'></section></div>";    
-    } else {
-        board.orientation('black')
-        document.getElementById('benchtop').innerHTML = "<div id='left-bench1' class='left-bench1 benchPlayer'>(w) -player-</div><div id='right-bench1' class='right-bench1 benchClock'><section id='clockW'></section></div>";
-        document.getElementById('benchbottom').innerHTML = "<div id='left-bench2' class='left-bench2 benchPlayer'>(b) -player-</div><div id='right-bench2' class='right-bench2 benchClock'><section id='clockB'></section></div>";    
-    }
-
-    document.getElementById('left-bench1').innerHTML = "(w) " + wID;
-    document.getElementById('left-bench2').innerHTML = "(b) " + bID;
-
-    initChart();
-    updateChart();
-
-    const animateClick = function(x, revert=true) {
-        $(x).animate({ color:"gray" }, 100, callback=function() {
-            if (revert) {
-                $(x).animate({ color:"black" }, 100);
-            }
-        });
-    }
-
-    $("#fa-fast-backward").click(function() {
-        if (moveBegin()) {
-            //animateClick("#fa-fast-backward", false);
-        }
-    });
-
-    $("#fa-step-backward").click(function() {
-        if (stepBack()) {
-            //animateClick("#fa-step-backward");            
-        }
-    });
-
-    $("#fa-step-forward").click(function() {
-        if (stepNext()) {
-            //animateClick("#fa-step-forward");
-        }
-    });
-
-    $("#fa-fast-forward").click(function() {
-        if (moveEnd()) {
-            //animateClick("#fa-fast-forward", false);
-        }
-    });
-
-    $("body").keydown(function(e) {
-        const code = (e.keyCode || e.which);
-        if (code == 37) { stepBack(); }
-        if (code == 39) { stepNext(); }
-    });
-	*/
 }
 
 GameState["board"] = Chessboard('myBoard', {

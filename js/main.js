@@ -94,6 +94,10 @@ function toggleComplete() {
 	$('#modalComplete').modal('toggle');
 }
 
+function toggleCheckmark() {
+	$('#modalCheckmark').modal('toggle');
+}
+
 function startGame() {
 	GameState["timeW"] = 30 * 60; // 30 minutes
 	GameState["timeB"] = 10 * 60; // 10 minutes	
@@ -220,8 +224,12 @@ $(document).ready(function() {
 		$("#resign").hide();
 	});
 	
-	$("#completeClose").click(function() {
+	$("#modalCompleteClose").click(function() {
 		$('#modalComplete').modal('toggle');
+	});
+
+	$("#modalCheckmarkClose").click(function() {
+		$('#modalCheckmark').modal('toggle');
 	});
 	
 	$("#reset").click(function() {		
