@@ -258,18 +258,17 @@ function onDrop(source, target) {
 		addTime();
 		startThink();
 	} else {
-		console.log("Game over!");
 		const p = GameState["player"];
 		const c = GameState["computer"];
 		
 		const game   = GameState["game"];
 		const isDraw = game.in_draw();
-		const isWWon = !isDraw && game.fen().includes(" b ");
-		
-		// Only credits if the player wins by checkmate
-		const shouldCredit = (p === "w" && isWWon) || (p === "b" && !isWWon)
-		
-		if (shouldCredit) {
+		const isWWon = p === "w" && !isDraw;
+
+		if (isWWon) {
+			// Assume the player always play White
+			GameState["result"] = "1-0";
+			
 			const oldStatus = isCurrentCourseCompleted();
 			
 			// The positon being played
@@ -281,9 +280,6 @@ function onDrop(source, target) {
 			x.status = 1;    // Completed
 			updateCredits(); // Update the credits
 
-			// Assume the player always play White
-			GameState["result"] = "1-0";
-			
 			const newStatus = isCurrentCourseCompleted();
 
 			// Just completed the course?
@@ -292,15 +288,21 @@ function onDrop(source, target) {
 				showReset();
 			}
 			
-			toggleCheckmark();			
-		} else if (isDraw) {
-			GameState["result"] = "1/2-1/2";
+			addMessage("White wins by checkmate.");
+			toggleCheckmark();
 		} else {
-			// Assume the player always play White
-			GameState["result"] = "0-1";
+			GameState["result"] = "1/2-1/2";
+			
+			if (game.in_stalemate()) {
+				addMessage("Game over. Draw by stalemate");
+			} else if (game.in_threefold_repetition()) {
+				addMessage("Game over. Draw by three fold repetitions");
+			} else if (game.insufficient_material()) {
+				addMessage("Game over. Draw by insufficient material");
+			}
 		}
-		
-		$("#resign").hide();
+
+		hideResign();
 	}
 	
 	reloadUI();
@@ -308,12 +310,14 @@ function onDrop(source, target) {
 }
 
 function startNew() {
+	addMessage("");
 	GameState["timeW"]  = 30 * 60; // 30 minutes
 	GameState["timeB"]  = 10 * 60; // 10 minutes		
 	GameState["moves"]  = [];
 	GameState["result"] = "*";
 	GameState["game"].load(getSelectedFEN());
 	//GameState["game"].load("7k/8/8/8/8/8/6R1/5KR1 w - - 0 1");
+	//GameState["game"].load("7k/8/5K2/6Q1/8/8/8/8 w - - 0 1");	
 	GameState["board"].position(GameState["game"].fen());
 	$("#resign").show();
 }

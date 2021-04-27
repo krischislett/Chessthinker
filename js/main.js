@@ -75,6 +75,10 @@ function updateBoardColor() {
 	}
 }
 
+function addMessage(x) {
+	$("#message").text(x);
+}
+
 function isCurrentCourseCompleted() {
 	const tmp = Courses[getSelectedCourse()];
 	for (var i = 0; i < tmp.length; i++) {
@@ -113,6 +117,18 @@ function startGame() {
 
 function showReset() {
 	$('#reset').show();
+}
+
+function hideReset() {
+	$('#reset').hide();
+}
+
+function showResign() {	
+	$("#resign").show();
+}
+
+function hideResign() {	
+	$("#resign").hide();
 }
 
 $(document).ready(function() {
@@ -221,6 +237,7 @@ $(document).ready(function() {
 	$("#resign").click(function() {
 		alert("You have resigned for the position. Please try again.");
 		GameState["result"] = "0-1"; // Always player play White
+		addMessage("Blacks wins by resignation.");
 		$("#resign").hide();
 	});
 	
