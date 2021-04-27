@@ -200,7 +200,7 @@ $(document).ready(function() {
 	
 	$(".promoteQ").click(function() {
 		console.log("Promoting to queen");
-		$('#myModal').modal('hide');
+		$('#modalPromote').modal('hide');
 		GameState["TEMP_PROMOTE"] = "q";
 		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
 		GameState["TEMP_PROMOTE"] = null;
@@ -209,7 +209,7 @@ $(document).ready(function() {
 
 	$(".promoteR").click(function() {
 		console.log("Promoting to rook");
-		$('#myModal').modal('hide');
+		$('#modalPromote').modal('hide');
 		GameState["TEMP_PROMOTE"] = "r";
 		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
 		GameState["TEMP_PROMOTE"] = null;
@@ -218,7 +218,7 @@ $(document).ready(function() {
 
 	$(".promoteB").click(function() {
 		console.log("Promoting to knight");
-		$('#myModal').modal('hide');
+		$('#modalPromote').modal('hide');
 		GameState["TEMP_PROMOTE"] = "b";
 		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
 		GameState["TEMP_PROMOTE"] = null;
@@ -227,7 +227,7 @@ $(document).ready(function() {
 
 	$(".promoteN").click(function() {
 		console.log("Promoting to pawn");
-		$('#myModal').modal('hide');
+		$('#modalPromote').modal('hide');
 		GameState["TEMP_PROMOTE"] = "n";
 		onDrop(GameState["PROMOTE_SOURCE"], GameState["PROMOTE_TARGET"]);
 		GameState["TEMP_PROMOTE"] = null;
